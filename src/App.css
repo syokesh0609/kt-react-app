@@ -2,7 +2,7 @@
   text-align: center;
 } */
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: none;
+  background-color: black;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -36,7 +36,7 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
 form {
   display: table;
   /* text-align: center; */
@@ -108,3 +108,33 @@ input {
 .input {
   display: table-cell;
 }
+
+.switch {
+  display: flex;
+  width: 100vw;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.switch label {
+  margin: 10px;
+}
+
+#light .switch label {
+  color: black;
+}
+
+#dark .switch label {
+  color: white;
+}
+
+#light {
+  background-color: #f3ebf6;
+}
+
+.dark {
+  background-color: #46045e;
+}
+
+

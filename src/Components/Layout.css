@@ -1,7 +1,9 @@
 .header {
   overflow: hidden;
-  background-color: lightblue;
-  padding: 20px 10px;
+  background-color: black;
+  color: white;
+  /* padding: 20px 10px; */
+  
 }
 
 .home,
@@ -9,7 +11,7 @@
 .user,
 .user1 {
   float: left;
-  color: black;
+  color: white;
   text-align: center;
   padding: 12px;
   text-decoration: none;

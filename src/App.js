@@ -6,9 +6,13 @@ import Contact from "./Components/Contact";
 import { Routes, Route } from "react-router-dom";
 import User2 from "./Components/user2";
 
+
 function App() {
+
   return (
     <div className="App">
+      <div className="dark">
+      
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="home" element={<Home />} />
@@ -18,6 +22,8 @@ function App() {
         </Route>
       </Routes>
     </div>
+    </div>
+    
   );
 }
 
