@@ -37,6 +37,10 @@
     transform: rotate(360deg);
   }
 } */
+
+/* body{
+  background-color: black;
+} */
 form {
   display: table;
   /* text-align: center; */
@@ -129,12 +133,36 @@ input {
   color: white;
 }
 
-#light {
+/* #light {
   background-color: #f3ebf6;
 }
 
 .dark {
-  background-color: #46045e;
+  background-color: red;
+} */
+
+.bg-dark{
+  background-color: black;
+  color: white;
+}
+
+.bg-light{
+  background-color: white;
+}
+
+.bg-dark .Jcard, .bg-dark .Incard, .bg-dark .MuiCardContent-root{
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+}
+
+.bg-dark .form{
+  color: white;
+}
+
+.bg-dark .user1{
+  color: white;
+  border: 2px solid white;
 }
 
 

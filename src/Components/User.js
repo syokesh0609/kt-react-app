@@ -8,10 +8,9 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 // import { Routes, Route, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { createContext } from "react";
+// import { createContext } from "react";
 
- 
-export const ThemeContext = createContext(null);
+// export const ThemeContext = createContext(null);
 // import { useEffect } from "react";
 // import TableContainer from "@material-ui/core/TableContainer";
 // import Table from "@material-ui/core/Table";
@@ -30,14 +29,14 @@ function User() {
   const [Domain, setTitle4] = useState("");
   const [Phone_Number, setTitle5] = useState("");
   const [Email, setTitle6] = useState("");
-  const [ {Total_card_items} , setItems] = useState({Total_card_items:[]});
+  const [{ Total_card_items }, setItems] = useState({ Total_card_items: [] });
 
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  const [theme, setTheme] = useState("light");
-  const toggleTheme = () => {
-    setTheme((curr) => (curr === "light" ? "dark" : "light"));
-  };
+  // const [theme, setTheme] = useState("light");
+  // const toggleTheme = () => {
+  //   setTheme((curr) => (curr === "light" ? "dark" : "light"));
+  // };
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -89,59 +88,59 @@ function User() {
     } else {
       // const Total_card_items = [];
       Total_card_items.push(
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
-        <div key={Total_card_items.length}>
-          {/* Card===================================== */}
+        // <ThemeContext.Provider value={{ theme, toggleTheme }}>
+          <div key={Total_card_items.length}>
+            {/* Card===================================== */}
 
-          <div onClick={alertwin}>
-            <Card
-              style={{
-                width: 400,
-                // backgroundColor: "white",
-                color: "black",
-                boxShadow:
-                  "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset",
-                border: "2px solid black",
-                margin: "30px",
-                cursor: "pointer",
-              }}
-            >
-              <CardContent className="Incard" id={theme}>
-                <Typography variant="h5" component="h2">
-                  <b>FirstName</b> : {First_Name}
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  <b>LastName</b> : {Last_Name}
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  <b>Email</b> : {Email}
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  <b>Emp.Id</b> : {Employee_Id}
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  <b>Age</b> : {Age}
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  <b>Domain</b> : {Domain}
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  <b>Phone.No</b> : {Phone_Number}
-                </Typography>
-              </CardContent>
-            </Card>
+            <div onClick={alertwin}>
+              <Card
+                style={{
+                  width: 400,
+                  // backgroundColor: "white",
+                  color: "black",
+                  boxShadow:
+                    "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset",
+                  border: "2px solid black",
+                  margin: "30px",
+                  cursor: "pointer",
+                }}
+              >
+                <CardContent className="Incard" >
+                  <Typography variant="h5" component="h2">
+                    <b>FirstName</b> : {First_Name}
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                    <b>LastName</b> : {Last_Name}
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                    <b>Email</b> : {Email}
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                    <b>Emp.Id</b> : {Employee_Id}
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                    <b>Age</b> : {Age}
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                    <b>Domain</b> : {Domain}
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                    <b>Phone.No</b> : {Phone_Number}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </div>
           </div>
-        </div>
-        </ThemeContext.Provider>
+        // </ThemeContext.Provider>
       );
-      setItems( {Total_card_items: [...Total_card_items]} );
+      setItems({ Total_card_items: [...Total_card_items] });
 
       // function card() {
       //   return (
       //     <>
       //       {(() => {
       //         const dataCollect = [];
-    
+
       //         dataCollect.push(
       //           <div onClick={alertwin}>
       //             <Card
@@ -181,7 +180,7 @@ function User() {
       //             </Card>
       //           </div>
       //         );
-    
+
       //         return dataCollect;
       //       })()}
       //     </>
@@ -190,7 +189,6 @@ function User() {
       form.current.reset();
       document.employee_form.reset();
       // submit();
-      
     }
 
     function alertwin() {
@@ -215,61 +213,65 @@ function User() {
           const dataCollect = [];
           for (let i = 0; i < data.length; i++) {
             dataCollect.push(
-              <ThemeContext.Provider value={{ theme, toggleTheme }}>
-              <div onClick={web_alert} id={theme}>
-                <Card
-                  style={{
-                    width: 400,
-                    // backgroundColor: "white",
-                    color: "black",
-                    boxShadow:
-                      "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset",
-                    border: "2px solid black",
-                    margin: "30px",
-                    cursor: "pointer",
-                  }}
-                >
-                  <CardContent className="Jcard" id={theme}>
-                    <Typography variant="h5" component="h2">
-                      <b>ID</b> : {data[i].id}
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                      <b>Name</b> : {data[i].name}
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                      <b>UserName</b> : {data[i].username}
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                      <b>Email</b> : {data[i].email}
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                      <b><u>Address</u></b>
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                      <b>Street</b> : {data[i].address.street}
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                      <b>Suite</b> : {data[i].address.suite}
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                      <b>City</b> : {data[i].address.city}
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                      <b>Zipcode</b> : {data[i].address.zipcode}
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                      <b><u>Geo</u></b>
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                      <b>Lat</b> : {data[i].address.geo.lat}
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                      <b>Lng</b> : {data[i].address.geo.lng}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </div>
-              </ThemeContext.Provider>
+              // <ThemeContext.Provider value={{ theme, toggleTheme }}>
+                <div onClick={web_alert} >
+                  <Card
+                    style={{
+                      width: 400,
+                      // backgroundColor: "white",
+                      color: "black",
+                      boxShadow:
+                        "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset",
+                      border: "2px solid black",
+                      margin: "30px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <CardContent className="Jcard" >
+                      <Typography variant="h5" component="h2">
+                        <b>ID</b> : {data[i].id}
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        <b>Name</b> : {data[i].name}
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        <b>UserName</b> : {data[i].username}
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        <b>Email</b> : {data[i].email}
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        <b>
+                          <u>Address</u>
+                        </b>
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        <b>Street</b> : {data[i].address.street}
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        <b>Suite</b> : {data[i].address.suite}
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        <b>City</b> : {data[i].address.city}
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        <b>Zipcode</b> : {data[i].address.zipcode}
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        <b>
+                          <u>Geo</u>
+                        </b>
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        <b>Lat</b> : {data[i].address.geo.lat}
+                      </Typography>
+                      <Typography variant="h5" component="h2">
+                        <b>Lng</b> : {data[i].address.geo.lng}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </div>
+              // </ThemeContext.Provider>
             );
             function web_alert() {
               navigate("/user2", {
@@ -295,121 +297,114 @@ function User() {
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      
-    <div>
-      
-      <div className="App" id={theme}>
-      <div className="toggle-theme-wrapper">
-      <span>☀️</span>
-      <label className="toggle-theme" htmlFor="checkbox">
-        <input
-          type="checkbox"
-          id="checkbox"
-          onChange={toggleTheme}
-          
-        />
-        <div className="slider round"></div>
-      </label>
-      <span>🌒</span>
-    </div>
-      {/* <label> {theme === "light" ? "Light Mode" : "Dark Mode"}</label> */}
-          
-        <header className="App-header">
-          <form className="form" name="employee_form" ref={form}>
-            <fieldset className="field">
-              <center>
-                <legend className="head">
-                  <u>Employee Details</u>
-                </legend>
-              </center>
-              <p>
-                <label>First Name:</label>
-                <input
-                id={theme}
-                  type="text"
-                  className="firstname"
-                  onChange={(event) => setTitle(event.target.value)}
-                />
-                <br></br>
-              </p>
-              <p>
-                <label>Last Name:</label>
-                <input
-                id={theme}                  
-                type="text"
-                  className="lastname"
-                  onChange={(event) => setTitle1(event.target.value)}
-                />
-                <br></br>
-              </p>
-              <p>
-                <label>Email:</label>
-                <input
-                id={theme}
-                  type="text"
-                  className="email"
-                  onChange={(event) => setTitle6(event.target.value)}
-                />
-                <br></br>
-              </p>
-              <p>
-                <label>Emp.ID:</label>
-                <input
-                id={theme}
-                  type="text"
-                  className="empid"
-                  onChange={(event) => setTitle2(event.target.value)}
-                />
-                <br></br>
-              </p>
-              <p>
-                <label>Age:</label>
-                <input
-                id={theme}
-                  type="text"
-                  className="age"
-                  onChange={(event) => setTitle3(event.target.value)}
-                />
-                <br></br>
-              </p>
-              <p>
-                <label>Domain:</label>
-                <input
-                id={theme}
-                  type="text"
-                  className="domain"
-                  onChange={(event) => setTitle4(event.target.value)}
-                />
-                <br></br>
-              </p>
-              <p>
-                <label>Phone No:</label>
-                <input
-                id={theme}
-                  type="text"
-                  className="phone"
-                  onChange={(event) => setTitle5(event.target.value)}
-                />
-                <br></br>
-              </p>
-              <center>
-                <input
-                id={theme}
-                  type="submit"
-                  value="Submit"
-                  className="submit_button"
-                  onClick={submit}
-                />
-              </center>
-            </fieldset>
-          </form>
-          <div id="card_box" >{Total_card_items}</div>
-          <div className={theme}>{web_jsonData()}</div>
-        </header>
+    // <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <div>
+        <div className="App" >
+          {/* <div className="toggle-theme-wrapper">
+            <span>☀️</span>
+            <label className="toggle-theme" htmlFor="checkbox">
+              <input type="checkbox" id="checkbox"  />
+              <div className="slider round"></div>
+            </label>
+            <span>🌒</span>
+          </div> */}
+          {/* <label> {theme === "light" ? "Light Mode" : "Dark Mode"}</label> */}
+
+          <header className="App-header">
+            <form className="form" name="employee_form" ref={form}>
+              <fieldset className="field">
+                <center>
+                  <legend className="head">
+                    <u>Employee Details</u>
+                  </legend>
+                </center>
+                <p>
+                  <label>First Name:</label>
+                  <input
+                   
+                    type="text"
+                    className="firstname"
+                    onChange={(event) => setTitle(event.target.value)}
+                  />
+                  <br></br>
+                </p>
+                <p>
+                  <label>Last Name:</label>
+                  <input
+                    
+                    type="text"
+                    className="lastname"
+                    onChange={(event) => setTitle1(event.target.value)}
+                  />
+                  <br></br>
+                </p>
+                <p>
+                  <label>Email:</label>
+                  <input
+                    
+                    type="text"
+                    className="email"
+                    onChange={(event) => setTitle6(event.target.value)}
+                  />
+                  <br></br>
+                </p>
+                <p>
+                  <label>Emp.ID:</label>
+                  <input
+                    
+                    type="text"
+                    className="empid"
+                    onChange={(event) => setTitle2(event.target.value)}
+                  />
+                  <br></br>
+                </p>
+                <p>
+                  <label>Age:</label>
+                  <input
+                    
+                    type="text"
+                    className="age"
+                    onChange={(event) => setTitle3(event.target.value)}
+                  />
+                  <br></br>
+                </p>
+                <p>
+                  <label>Domain:</label>
+                  <input
+                    
+                    type="text"
+                    className="domain"
+                    onChange={(event) => setTitle4(event.target.value)}
+                  />
+                  <br></br>
+                </p>
+                <p>
+                  <label>Phone No:</label>
+                  <input
+                    
+                    type="text"
+                    className="phone"
+                    onChange={(event) => setTitle5(event.target.value)}
+                  />
+                  <br></br>
+                </p>
+                <center>
+                  <input
+                    
+                    type="submit"
+                    value="Submit"
+                    className="submit_button"
+                    onClick={submit}
+                  />
+                </center>
+              </fieldset>
+            </form>
+            <div id="card_box">{Total_card_items}</div>
+            <div >{web_jsonData()}</div>
+          </header>
+        </div>
       </div>
-    </div>
-    </ThemeContext.Provider>
+    // </ThemeContext.Provider>
   );
 }
 
