@@ -297,18 +297,9 @@ function User() {
   }
 
   return (
-    // <ThemeContext.Provider value={{ theme, toggleTheme }}>
+
       <div>
         <div className="App" >
-          {/* <div className="toggle-theme-wrapper">
-            <span>☀️</span>
-            <label className="toggle-theme" htmlFor="checkbox">
-              <input type="checkbox" id="checkbox"  />
-              <div className="slider round"></div>
-            </label>
-            <span>🌒</span>
-          </div> */}
-          {/* <label> {theme === "light" ? "Light Mode" : "Dark Mode"}</label> */}
 
           <header className="App-header">
             <form className="form" name="employee_form" ref={form}>

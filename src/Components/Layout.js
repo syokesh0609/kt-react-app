@@ -15,6 +15,10 @@ const Layout = () => {
             User
           </Link>
 
+          <Link to="/Apicalendar" className="calendar">
+            Calendar
+          </Link>
+
           <Link to="/contact" className="contact">
             Contact
           </Link>
