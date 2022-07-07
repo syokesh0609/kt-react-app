@@ -19,6 +19,10 @@ const Layout = () => {
             Calendar
           </Link>
 
+          <Link to="/table" className="table">
+            Table
+          </Link>
+
           <Link to="/contact" className="contact">
             Contact
           </Link>

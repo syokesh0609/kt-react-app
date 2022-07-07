@@ -4,6 +4,7 @@ import Home from "./Components/Home";
 import Layout from "./Components/Layout";
 import Contact from "./Components/Contact";
 import ApiCalendar from "./Components/ApiCalendar";
+import MyTable from "./Components/Table";
 import { Routes, Route } from "react-router-dom";
 import User2 from "./Components/user2";
 import { useContext } from "react";
@@ -25,8 +26,8 @@ function App() {
             <Route path="user" element={<User />} />
             <Route path="contact" element={<Contact />} />
             <Route path="user2" element={<User2 />} />
-            {/* <Route path="calendar" element={<MyCalendar />} /> */}
             <Route path="Apicalendar" element={<ApiCalendar />} />
+            <Route path="table" element={<MyTable />} />
           </Route>
         </Routes>
       </div>

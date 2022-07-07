@@ -10,6 +10,7 @@
 .contact,
 .calendar,
 .user,
+.table,
 .user1 {
   float: left;
   color: white;
@@ -23,6 +24,7 @@
 
 .home:hover,
 .user:hover,
+.table:hover,
 .calendar:hover,
 .user1:hover,
 .contact:hover {
@@ -37,6 +39,7 @@
 @media screen and (max-width: 500px) {
   .home,
   .contact,
+  table,
   .user, .calendar {
     float: none;
     display: block;
@@ -51,4 +54,8 @@
 .user1 {
   color: black;
   border: 2px solid black;
+}
+
+.tableelem{
+  color:red;
 }
