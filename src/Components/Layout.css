@@ -3,7 +3,6 @@
   background-color: black;
   color: white;
   /* padding: 20px 10px; */
-  
 }
 
 .home,
@@ -40,7 +39,8 @@
   .home,
   .contact,
   table,
-  .user, .calendar {
+  .user,
+  .calendar {
     float: none;
     display: block;
     text-align: left;
@@ -56,6 +56,6 @@
   border: 2px solid black;
 }
 
-.tableelem{
-  color:red;
+.tableelem {
+  color: red;
 }

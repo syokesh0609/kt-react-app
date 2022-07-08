@@ -47,7 +47,9 @@ function User2() {
                     <b>Email</b> : {location.state.email}
                   </Typography>
                   <Typography variant="h5" component="h2">
-                    <b><u>Address</u></b>
+                    <b>
+                      <u>Address</u>
+                    </b>
                   </Typography>
                   <Typography variant="h5" component="h2">
                     <b>Street</b> : {location.state.street}
@@ -62,7 +64,9 @@ function User2() {
                     <b>Zipcode</b> : {location.state.zipcode}
                   </Typography>
                   <Typography variant="h5" component="h2">
-                    <b><u>Geo</u></b>
+                    <b>
+                      <u>Geo</u>
+                    </b>
                   </Typography>
                   <Typography variant="h5" component="h2">
                     <b>Lat</b> : {location.state.lat}

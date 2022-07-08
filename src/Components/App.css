@@ -108,10 +108,11 @@ input {
 .input {
   display: table-cell;
 }
-#dark{
-  background-color:rgb(22, 13, 2);
-  --font-color: #eee;}
-#light{
+#dark {
+  background-color: rgb(22, 13, 2);
+  --font-color: #eee;
+}
+#light {
   background-color: white;
 }
 
@@ -175,32 +176,72 @@ input:checked + .slider {
   border-radius: 50%;
 }
 
-
-#dark .App-header{
+#dark .App-header {
   color: white;
 }
 
-#dark input{
+#dark input {
   background-color: white;
 }
 
-#dark .Jcard{
+#dark .Jcard {
   color: white;
   border: 2px solid white;
 }
 
-#dark .Incard{
+#dark .Incard {
   color: white;
   border: 2px solid white;
   background-color: rgb(22, 13, 2);
 }
 
-#light .Incard{
+#light .Incard {
   color: black;
   border: 2px solid black;
   background-color: white;
 }
 
-.bg-dark .home1, .bg-dark .contact1{
+.bg-dark .home1,
+.bg-dark .contact1 {
   color: white;
+}
+
+.MuiTableHeader-root {
+  color: red;
+  background-color: red;
+}
+
+.tss-tlx3x1-MUIDataTableToolbar-root {
+  background-color: lightblue;
+  color: black;
+  font-weight: bolder;
+}
+
+/* .bg-dark .css-rqglhn-MuiTable-root{
+  background-color: black;
+  color: white;
+} */
+
+.bg-dark .css-ahj2mt-MuiTypography-root,
+.bg-dark .css-jtlhu6-MuiTablePagination-root,
+.bg-dark .css-1ex1afd-MuiTableCell-root,
+.bg-dark .tablehead {
+  color: white;
+}
+
+.bg-dark .css-11mde6h-MuiPaper-root,
+.bg-dark .css-1ygcj2i-MuiTableCell-root {
+  background-color: black;
+  color: white;
+}
+
+/* .bg-dark input{
+  border: 2px solid white;
+} */
+
+.tablehead {
+  font-size: large;
+  font-weight: bolder;
+  color: black;
+  font-size: 100px;
 }
