@@ -59,3 +59,12 @@
 .tableelem {
   color: red;
 }
+
+.home:focus,
+.user:focus,
+.table:focus,
+.calendar:focus,
+.user1:focus,
+.contact:focus{
+  background-color: red;
+}

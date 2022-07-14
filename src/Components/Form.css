@@ -1,0 +1,165 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-color: white;
+  border: 1px solid #a9a9a9;
+  height: 190px;
+}
+
+/* Full-width input fields */
+input[type="text"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 2px 0;
+  display: inline-block;
+  border: 1px solid #a9a9a9;
+  font-size: small;
+  height: 35px;
+  /* background: #f1f1f1; */
+}
+
+input[type="text"]:focus,
+select:focus {
+  background-color: #ddd;
+  /* border: 1px solid black; */
+  /* outline: none; */
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #04aa6d;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+/* .App-header { */
+/* background-color: none; */
+/* min-height: 100vh; */
+/* display: flex; */
+/* flex-direction: column; */
+/* align-items: center; */
+/* justify-content: center; */
+/* font-size: 30px; */
+/* color: black; */
+/* line-height: 60px; */
+/* } */
+.formfield {
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
+  background-color: white;
+  /* border: 2px solid black; */
+  margin: 20px;
+  height: 700px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  /* line-height: 50px; */
+  /* min-height: 100vh; */
+}
+.description {
+  height: 100px;
+  width: 100%;
+  border: 1px solid #a9a9a9;
+}
+
+.horizontal-group .left {
+  float: left;
+  width: 49%;
+}
+
+.horizontal-group .right {
+  float: right;
+  width: 49%;
+}
+
+.btn {
+  padding: 10px;
+  background-color: white;
+  font-size: 17px;
+  border: 1px solid black;
+  color: white;
+  cursor: pointer;
+  background-color: #21b613 !important;
+  border-radius: 5px;
+  float: right;
+}
+
+.btn1 {
+  background-color: #4d5050 !important;
+  padding: 10px;
+  background-color: white;
+  font-size: 17px;
+  border: 1px solid black;
+  color: white;
+  cursor: pointer;
+  /* background-color: #21b613!important; */
+  border-radius: 5px;
+  float: right;
+}
+
+#Save {
+  margin-right: 16px;
+  /* margin-left: 200px; */
+}
+
+.form-header {
+  background-color: rgb(255, 255, 255);
+  color: #808080;
+}
+
+.bg-dark label {
+  color: white;
+}
+
+.bg-dark .formfield,
+.bg-dark .container,
+.bg-dark input,
+.bg-dark .description,
+.bg-dark .form-header,
+.bg-dark select {
+  background-color: black;
+  color: white;
+}
+
+.new {
+  float: right;
+  height: 64px;
+  border: none;
+  background-color: lightblue;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-size: smaller;
+}

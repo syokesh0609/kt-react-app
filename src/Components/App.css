@@ -1,6 +1,6 @@
-/* .App {
-  text-align: center;
-} */
+.App {
+  min-height: 100vh;
+}
 
 .App-logo {
   height: 40vmin;
@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   font-size: 30px;
   color: black;
   line-height: 60px;
@@ -37,7 +37,7 @@
     transform: rotate(360deg);
   }
 }
-form {
+.form {
   display: table;
   /* text-align: center; */
 }
@@ -244,4 +244,8 @@ input:checked + .slider {
   font-weight: bolder;
   color: black;
   font-size: 100px;
+}
+
+.formuser{
+  height: 500px;
 }

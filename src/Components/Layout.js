@@ -22,6 +22,18 @@ const Layout = () => {
             Table
           </Link>
 
+          <Link to="/CRUD" className="table">
+            CRUD_Table
+          </Link>
+
+          <Link to="/Form" className="table">
+            Create_Form
+          </Link>
+
+          {/* <Link to="/UpdateForm" className="table">
+            Update_Form
+          </Link> */}
+
           <Link to="/contact" className="contact">
             Contact
           </Link>

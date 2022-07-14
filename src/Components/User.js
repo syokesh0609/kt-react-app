@@ -43,6 +43,7 @@ function User() {
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
+  console.log(data);
 
   function submit(event) {
     event.preventDefault();
@@ -86,6 +87,8 @@ function User() {
         "Please enter the correct Phone Number! (Phone number should be 10 digit numbers!!)"
       );
     } else {
+      console.log(First_Name);
+
       // const Total_card_items = [];
       Total_card_items.push(
         // <ThemeContext.Provider value={{ theme, toggleTheme }}>
