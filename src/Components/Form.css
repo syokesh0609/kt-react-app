@@ -160,6 +160,7 @@ a {
 }
 
 .error {
-  color: red;
-  font-size: smaller;
+  color:#db2269;
+  font-size: 0.8em;
+  display: relative;
 }

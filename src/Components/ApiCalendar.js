@@ -23,11 +23,8 @@ function ApiCalendar(props) {
       },
       body: JSON.stringify({
         project_name: "Audio_Video_Testing",
-
         project_id: "623ef791506af740d05fe13b",
-
         version_name: "AV_Version1.0",
-
         version_id: "623ef7e3506af740d05fe13d",
       }),
     };

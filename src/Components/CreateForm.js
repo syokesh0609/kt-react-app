@@ -1,238 +1,253 @@
-import MUIDataTable from "mui-datatables";
-import * as React from "react";
+import React from "react";
 import { useState } from "react";
-import { useEffect } from "react";
-import "./Form.css";
 
-function CardForm() {
-  const [RequirementName, setTitle] = useState("");
-  const [RequirementId, setTitle1] = useState("");
-  const [Priority, setTitle2] = useState("");
-  const [AltId, setTitle3] = useState("");
-  // const [Create, setTitle4] = useState("");
-  const [Description, setTitle5] = useState("");
-  const [Userdata, setUdata] = useState("");
+const validnameRegex = RegExp(/^[A-Za-z\s]{4,20}$/);
+const validdescriptionRegex = RegExp(/^[A-Za-z.-_\s]{20,}$/);
 
-  // console.log(Userdata);
+const validateForm = errors => {
+  let valid = true;
+  Object.values(errors).forEach(val => val.length > 0 && (valid = false));
+  return valid;
+};
 
-  const [data, setData] = useState([]);
-  const [errorMessage, setErrorMessage] = React.useState("");
-  const [errorMessagealtid, setErrorMessagealtid] = React.useState("");
-  const [errorMessagerequirename, setErrorMessagerequirename] =
-    React.useState("");
-  const [errorMessagedescription, setErrorMessagedescription] =
-    React.useState("");
+const sub_array =[]
+fetch("http://172.20.8.192:8000/getData?doc=all", {
+  method: "GET",
+})
+  .then((response) => response.json())
+  .then((data) => {
+    for (let i = 0; i < data.length; i++) {
+      sub_array.push(data[i].alt_id);
+      // super_array.push(...sub_array.slice(0));
+  }
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
-  //   useEffect(() => {
-  //     // POST request using fetch inside useEffect React hook
-  //     const requestOptions = {
-  //       method: "POST",
-  //       headers: {
-  //         Accept:"application/json",
-  //         "Content-Type": "application/json",
 
-  //         Authorization: `Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJUeEgwVkhUelFZOGw4V1dIS3V5YXZhN3NHaFFKSWU4SCIsImV4cCI6MTY1MjQ0MTI3NiwiaWF0IjoxNjUyNDM3Njc2fQ.obtxT1dEk467u6N6r9r6Glj_4vLRSDvSqb_7eRaQNoM"}`,
-  //       },
-  //       body: JSON.stringify(Userdata),
-  //     };
-  //     fetch("http://172.20.8.177/api/v1/sum/saveVersion", requestOptions)
-  //       .then((response) => response.json())
-  //       .then((data) => setData(data));
-  //   }, []);
+export default class CreateForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fullName: null,
+      requireid: null,
+      priority: null,
+      altid: null,
+      admin: "admin",
+      description: null,
 
-  // console.log(data);
-  function submit(event) {
+      errors: {
+        fullName: "",
+        description: "",
+        altid: "",
+        requireid: "",
+      },
+    };
+  }
+
+  handleChange = (event) => {
     event.preventDefault();
+    const { name, value } = event.target;
+    let errors = this.state.errors;
 
-    let RequirementName_validation = /^[a-z]{4,16}$/;
-    let description_validation = /^(.|\s)*[a-zA-Z]+(.|\s){4}$/;
-    if (
-      RequirementName === "" ||
-      RequirementId === "" ||
-      Priority === "" ||
-      AltId === "" ||
-      Description === ""
-    ) {
-      alert("Please Enter all the datas!!!");
-    } else if (!RequirementName_validation.test(RequirementName)) {
-      setErrorMessagerequirename(
-        "Requirement name should be min 4 to maximum 16 characters!!!"
-      );
-    } else if (!description_validation.test(Description)) {
-      setErrorMessagedescription("Description should be min 4 characters!!!");
-      setErrorMessagerequirename("");
-    } else {
+   
+        // for (let i = 0; i < data.length; i++) {
+            // sub_array.push(data[i].alt_id);
+            // // super_array.push(...sub_array.slice(0));
+        // }
+
+        switch (name) {
+          case "fullName":
+            errors.fullName = validnameRegex.test(value)
+              ? ""
+              : "Requirement Name must be at least 4 to max 20 characters long!";
+            break;
+          case "description":
+            errors.description = validdescriptionRegex.test(value)
+              ? ""
+              : "Description must be minimum 20 characters!";
+            break;
+          // case "requireid":
+          //   errors.requireid =
+          //     value.length < 3
+          //       ? "Requirement Id must be minimum 3 characters!"
+          //       : "";
+          //   break;
+          case "altid":
+            errors.altid =
+            value.length < 2
+            ? "Alt id length min 2 characters" : 
+            errors.altid = 
+            sub_array[0] === value || sub_array[1] === value || sub_array[2] === value || sub_array[3] === value || sub_array[5] === value
+              ? `Alt id Already exits! ${value}`
+              : "";
+
+            break;
+          default:
+            break;
+        }
+      
+
+    this.setState({ errors, [name]: value });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    if(validateForm(this.state.errors)) {
+      console.info('Valid Form')
+      console.log(this.state.altid)
+      console.log(this.state.fullName);
       let a = {
-        requirement_name: RequirementName,
-        requirement_id: RequirementId,
-        priority: Priority,
-        alt_id: AltId,
+        requirement_name: this.state.fullName,
+        requirement_id: this.state.requireid,
+        priority: this.state.priority,
+        alt_id: this.state.altid,
         created_by: "admin",
-        description: Description,
+        description: this.state.description,
       };
       // setUdata(a);
       // console.log(Userdata);
-      fetch("http://172.20.8.192:8000/getData?doc=all", {
-        method: "GET",
+      let queryString = JSON.stringify(a);
+      fetch("http://172.20.8.192:8000/createData", {
+        method: "POST",
+        body: queryString,
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.find(({ alt_id }) => alt_id === AltId)) {
-            setErrorMessagealtid("AltId already exits!!!");
-            setErrorMessagedescription("");
-            setErrorMessagerequirename("");
-          } else {
-            let queryString = JSON.stringify(a);
-            fetch("http://172.20.8.192:8000/createData", {
-              method: "POST",
-              body: queryString,
-              headers: {
-                "Content-Type": "application/json",
-              },
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                console.log("Created Data ", data);
-                // history.pushState({}, null, "/Crud");
-                // window.history.pushState('', 'Crud', '/Crud');
-                window.location.href = "/Crud";
-                // navigate("/Crud")
-              })
-              .catch((err) => {
-                console.error(err);
-              });
-          }
+          console.log("Created Data ", data);
+          // history.pushState({}, null, "/Crud");
+          // window.history.pushState('', 'Crud', '/Crud');
+          window.location.href = "/Crud";
+          // navigate("/Crud")
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
+    }else{
+      console.error('Invalid Form')
     }
   }
 
-  // const getData = () => {
-  //   fetch("http://172.20.8.192:8000/createData", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //       body: JSON.stringify({a:"hihii",
-  //     b:"hello",}),
-  //           },
-  //   })
-  //     .then(function (response) {
-  //       console.log(response);
-  //       return response.json();
-  //     })
-  //     .then(function (myJson) {
-  //       console.log(myJson);
-  //       setData(myJson);
-  //     });
-  // };
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  render() {
+    const { errors } = this.state;
+    // console.log(errors)
+    return (
+      <div className="App">
+        <form className="formfield" onSubmit={this.handleSubmit}>
+          <div className="form-header">
+            <h1>
+              <i>Create#</i>
+            </h1>
+          </div>
+          <div>
+            <label for="requuirement_name">
+              <b>Requirement Name</b>
+            </label>
+            <input
+              type="text"
+              name="fullName"
+              placeholder="Enter requirement name here"
+              onChange={this.handleChange}
+              required
+            ></input>
+            {errors.fullName.length > 0 && (
+              <span className="error">{errors.fullName}</span>
+            )}
 
-  return (
-    <div className="App">
-      <div className="formfield">
-        <div className="form-header">
-          <h1>
-            <i>Create#</i>
-          </h1>
-        </div>
-        <label for="requuirement_name">
-          <b>Requirement Name</b>
-        </label>
-        <input
-          type="text"
-          placeholder="Enter requirement name here"
-          onChange={(event) => setTitle(event.target.value)}
-          required
-        ></input>
-        {errorMessagerequirename && (
-          <div className="error"> {errorMessagerequirename} </div>
-        )}
+            <label for="requuirement_details">
+              <b>Requirement Details:</b>
+            </label>
 
-        <label for="requuirement_details">
-          <b>Requirement Details:</b>
-        </label>
+            <div className="container">
+              <div className="horizontal-group">
+                <div className="form-group left">
+                  <label for="requuirement_id">Requirement ID</label>
+                  <input
+                    type="text"
+                    name="requireid"
+                    placeholder="Enter requirement ID here"
+                    onChange={this.handleChange}
+                    required
+                  ></input>
+                  {/* {errors.requireid.length > 0 && (
+                    <span className="error">{errors.requireid}</span>
+                  )} */}
+                </div>
+                <div className="form-group right">
+                  <label for="priority">Priority</label>
+                  <select name="priority" onChange={this.handleChange}>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                  </select>
+                </div>
+              </div>
 
-        <div className="container">
-          <div className="horizontal-group">
-            <div className="form-group left">
-              <label for="requuirement_id">Requirement ID</label>
-              <input
-                type="text"
-                placeholder="Enter requirement ID here"
-                onChange={(event) => setTitle1(event.target.value)}
-                required
-              ></input>
+              <div className="horizontal-group">
+                <div className="form-group left">
+                  <label for="Alt_id">Alt ID</label>
+                  <input
+                    type="text"
+                    name="altid"
+                    placeholder="Enter requirement Alt id here"
+                    onChange={this.handleChange}
+                    required
+                  ></input>
+                  {errors.altid.length > 0 && (
+                    <span className="error">{errors.altid}</span>
+                  )}
+                </div>
+                <div className="form-group right">
+                  <label for="Created">Created By</label>
+                  <input
+                    type="text"
+                    value="admin"
+                    name="admin"
+                    onChange={this.handleChange}
+                    disabled
+                    required
+                  ></input>
+                </div>
+              </div>
+              <br></br>
+              <br></br>
             </div>
-            <div className="form-group right">
-              <label for="priority">Priority</label>
-              <select onChange={(event) => setTitle2(event.target.value)}>
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-              </select>
+            <br></br>
+            <label for="description">
+              <b>Description</b>
+            </label>
+            <br></br>
+            <textarea
+              type="text"
+              className="description"
+              name="description"
+              placeholder="Write description"
+              onChange={this.handleChange}
+              required
+            ></textarea>
+            {errors.description.length > 0 && (
+              <span className="error">{errors.description}</span>
+            )}
+            <br></br>
+            <br></br>
+
+            <div className="horizontal-group">
+              <div className="form-group right">
+                <button type="reset" className="btn1">
+                  Cancel
+                </button>
+                <button className="btn" id="Save">
+                  Save
+                </button>
+              </div>
             </div>
           </div>
-          <div className="horizontal-group">
-            <div className="form-group left">
-              <label for="Alt_id">Alt ID</label>
-              <input
-                type="text"
-                placeholder="Enter requirement Alt id here"
-                onChange={(event) => setTitle3(event.target.value)}
-                required
-              ></input>
-              {errorMessagealtid && (
-                <div className="error"> {errorMessagealtid} </div>
-              )}
-            </div>
-            <div className="form-group right">
-              <label for="Created">Created By</label>
-              <input
-                type="text"
-                value="admin"
-                // onChange={(event) => setTitle4(event.target.value)}
-                disabled
-                required
-              ></input>
-            </div>
-          </div>
-        </div>
-        <br></br>
-        <label for="description">
-          <b>Description</b>
-        </label>
-        {/* <br></br> */}
-        <textarea
-          type="text"
-          className="description"
-          name="description"
-          placeholder="Write description"
-          onChange={(event) => setTitle5(event.target.value)}
-        ></textarea>
-        {errorMessagedescription && (
-          <div className="error"> {errorMessagedescription} </div>
-        )}
-        <br></br>
-        <br></br>
-
-        <div className="horizontal-group">
-          <div className="form-group right">
-            <button type="reset" className="btn1">
-              Cancel
-            </button>
-            <button className="btn" id="Save" onClick={submit}>
-              Save
-            </button>
-          </div>
-        </div>
+        </form>
       </div>
-    </div>
-  );
+    );
+  }
 }
-
-export default CardForm;

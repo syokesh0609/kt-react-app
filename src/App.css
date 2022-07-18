@@ -41,10 +41,9 @@
 /* body{
   background-color: black;
 } */
-form {
-  display: table;
+
   /* text-align: center; */
-}
+
 
 p {
   display: table-row;
