@@ -26,9 +26,9 @@ const Layout = () => {
             CRUD_Table
           </Link>
 
-          <Link to="/validate" className="table">
+          {/* <Link to="/validate" className="table">
             validate
-          </Link>
+          </Link> */}
 
           {/* <Link to="/UpdateForm" className="table">
             Update_Form

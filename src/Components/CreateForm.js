@@ -52,7 +52,7 @@ export default class CreateForm extends React.Component {
     let errors = this.state.errors;
 
    
-        // for (let i = 0; i < data.length; i++) {
+        // for (let i = 0; i < 5; i++) {
             // sub_array.push(data[i].alt_id);
             // // super_array.push(...sub_array.slice(0));
         // }
@@ -68,18 +68,13 @@ export default class CreateForm extends React.Component {
               ? ""
               : "Description must be minimum 20 characters!";
             break;
-          // case "requireid":
-          //   errors.requireid =
-          //     value.length < 3
-          //       ? "Requirement Id must be minimum 3 characters!"
-          //       : "";
-          //   break;
+         
           case "altid":
             errors.altid =
             value.length < 2
             ? "Alt id length min 2 characters" : 
             errors.altid = 
-            sub_array[0] === value || sub_array[1] === value || sub_array[2] === value || sub_array[3] === value || sub_array[5] === value
+            sub_array.indexOf(value) > -1
               ? `Alt id Already exits! ${value}`
               : "";
 
@@ -87,9 +82,10 @@ export default class CreateForm extends React.Component {
           default:
             break;
         }
-      
+        
 
     this.setState({ errors, [name]: value });
+  // }
   };
 
   handleSubmit = (event) => {

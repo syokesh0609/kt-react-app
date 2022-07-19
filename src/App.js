@@ -15,7 +15,7 @@ import SwitchButton from "./Button";
 import CreateForm from "./Components/CreateForm";
 import "./App.css";
 
-import Validate from "./Components/Validate"
+// import Validate from "./Components/Vlaidate"
 
 function App() {
   const theme = useContext(ThemeContext);
@@ -36,7 +36,7 @@ function App() {
             <Route path="CRUD" element={<Crud />} />
             <Route path="Form" element={<CreateForm />} />
             <Route path="UpdateForm" element={<UpdateForm />} />
-            <Route path="validate" element={<Validate />} />
+            {/* <Route path="validate" element={<Validate />} /> */}
           </Route>
         </Routes>
       </div>
