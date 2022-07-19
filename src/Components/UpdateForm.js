@@ -3,41 +3,34 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const Val = () => {
-      const location = useLocation();
-      let docId = location.state.id;
-        let Createrequirement_name = location.state.Rows[0];
+  const location = useLocation();
+  let docId = location.state.id;
+  let Createrequirement_name = location.state.Rows[0];
   let Createrequirement_id = location.state.Rows[1];
   let Createpriority = location.state.Rows[2];
   let Createaltid = location.state.Rows[3];
   let Createdescription = location.state.Rows[5];
 
-//   console.log(location)
+  //   console.log(location)
   // const [values, setState] = useState({ fullName: null,
   //     email: null,
   //     password: null,});
   const [values, setState] = useState({
-    
     fullName: Createrequirement_name,
     altid: Createaltid,
     requireid: Createrequirement_id,
     priority: Createpriority,
     description: Createdescription,
-    
+
     errors: {
       fullName: "",
       altid: "",
       description: "",
-    
     },
   });
-  const [fst, setFname] = useState("")
-  
+  const [fst, setFname] = useState("");
+
   // console.log(location)
-
-
-
-
-
 
   const sub_array = [];
   fetch("http://172.20.8.192:8000/getData?doc=all", {
@@ -67,7 +60,7 @@ const Val = () => {
         errors.fullName = validnameRegex.test(value)
           ? ""
           : "Requirement Name must be at least 4 to max 20 characters long!";
-          setFname(event.target.value)
+        setFname(event.target.value);
         break;
       case "description":
         errors.description = validdescriptionRegex.test(value)
@@ -89,9 +82,7 @@ const Val = () => {
         break;
     }
 
-    setState({...values, errors, [name]: value});
-    
-
+    setState({ ...values, errors, [name]: value });
   };
 
   const validateForm = (errors) => {
@@ -114,37 +105,36 @@ const Val = () => {
         created_by: "admin",
         description: values.description,
       };
-    //   // setUdata(a);
+      //   // setUdata(a);
       console.log(query);
-      console.log(values)
-      console.log(fst)
-    //   console.log(value)
-  
-      
-            let queryString = JSON.stringify(query);
-            fetch("http://172.20.8.192:8000/updateData", {
-              method: "PATCH",
-              body: queryString,
-              headers: {
-                "Content-Type": "application/json",
-              },
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                console.log(data);
-                window.location.href = "/Crud";
-              })
-              .catch((err) => {
-                console.error(err);
-              });
+      console.log(values);
+      console.log(fst);
+      //   console.log(value)
 
-
+      let queryString = JSON.stringify(query);
+      fetch("http://172.20.8.192:8000/updateData", {
+        method: "PATCH",
+        body: queryString,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     } else {
       console.error("Invalid Form");
-      console.log(values)
-
+      console.log(values);
     }
   };
+
+  function cancel() {
+    window.location.href = "/requirements";
+  }
 
   const { errors } = values;
 
@@ -153,7 +143,7 @@ const Val = () => {
       <form className="formfield" onSubmit={handleSubmit}>
         <div className="form-header">
           <h1>
-            <i>Create#</i>
+            <i>Update#</i>
           </h1>
         </div>
         <div>
@@ -188,13 +178,14 @@ const Val = () => {
                   value={values.requireid}
                   required
                 ></input>
-                {/* {errors.requireid.length > 0 && (
-                    <span className="error">{errors.requireid}</span>
-                  )} */}
               </div>
               <div className="form-group right">
                 <label for="priority">Priority</label>
-                <select name="priority" value={values.priority} onChange={handleChange}>
+                <select
+                  name="priority"
+                  value={values.priority}
+                  onChange={handleChange}
+                >
                   <option value="High">High</option>
                   <option value="Medium">Medium</option>
                   <option value="Low">Low</option>
@@ -254,7 +245,7 @@ const Val = () => {
 
           <div className="horizontal-group">
             <div className="form-group right">
-              <button type="reset" className="btn1">
+              <button type="reset" className="btn1" onClick={cancel}>
                 Cancel
               </button>
               <button className="btn" id="Save">

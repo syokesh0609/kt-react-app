@@ -33,7 +33,7 @@ function App() {
             <Route path="user2" element={<User2 />} />
             <Route path="Apicalendar" element={<ApiCalendar />} />
             <Route path="table" element={<MyTable />} />
-            <Route path="CRUD" element={<Crud />} />
+            <Route path="requirements" element={<Crud />} />
             <Route path="Form" element={<CreateForm />} />
             <Route path="UpdateForm" element={<UpdateForm />} />
             {/* <Route path="validate" element={<Validate />} /> */}

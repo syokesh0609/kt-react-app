@@ -1,16 +1,19 @@
 import React from "react";
-import { useState } from "react";
 
 const validnameRegex = RegExp(/^[A-Za-z\s]{4,20}$/);
 const validdescriptionRegex = RegExp(/^[A-Za-z.-_\s]{20,}$/);
 
-const validateForm = errors => {
+const validateForm = (errors) => {
   let valid = true;
-  Object.values(errors).forEach(val => val.length > 0 && (valid = false));
+  Object.values(errors).forEach((val) => val.length > 0 && (valid = false));
   return valid;
 };
 
-const sub_array =[]
+function cancel() {
+  window.location.href = "/requirements";
+}
+
+const sub_array = [];
 fetch("http://172.20.8.192:8000/getData?doc=all", {
   method: "GET",
 })
@@ -19,12 +22,11 @@ fetch("http://172.20.8.192:8000/getData?doc=all", {
     for (let i = 0; i < data.length; i++) {
       sub_array.push(data[i].alt_id);
       // super_array.push(...sub_array.slice(0));
-  }
+    }
   })
   .catch((err) => {
     console.log(err);
   });
-
 
 export default class CreateForm extends React.Component {
   constructor(props) {
@@ -51,48 +53,46 @@ export default class CreateForm extends React.Component {
     const { name, value } = event.target;
     let errors = this.state.errors;
 
-   
-        // for (let i = 0; i < 5; i++) {
-            // sub_array.push(data[i].alt_id);
-            // // super_array.push(...sub_array.slice(0));
-        // }
+    // for (let i = 0; i < 5; i++) {
+    // sub_array.push(data[i].alt_id);
+    // // super_array.push(...sub_array.slice(0));
+    // }
 
-        switch (name) {
-          case "fullName":
-            errors.fullName = validnameRegex.test(value)
-              ? ""
-              : "Requirement Name must be at least 4 to max 20 characters long!";
-            break;
-          case "description":
-            errors.description = validdescriptionRegex.test(value)
-              ? ""
-              : "Description must be minimum 20 characters!";
-            break;
-         
-          case "altid":
-            errors.altid =
-            value.length < 2
-            ? "Alt id length min 2 characters" : 
-            errors.altid = 
-            sub_array.indexOf(value) > -1
-              ? `Alt id Already exits! ${value}`
-              : "";
+    switch (name) {
+      case "fullName":
+        errors.fullName = validnameRegex.test(value)
+          ? ""
+          : "Requirement Name must be at least 4 to max 20 characters long!";
+        break;
+      case "description":
+        errors.description = validdescriptionRegex.test(value)
+          ? ""
+          : "Description must be minimum 20 characters!";
+        break;
 
-            break;
-          default:
-            break;
-        }
-        
+      case "altid":
+        errors.altid =
+          value.length < 2
+            ? "Alt id length min 2 characters"
+            : (errors.altid =
+                sub_array.indexOf(value) > -1
+                  ? `Alt id Already exits! ${value}`
+                  : "");
+
+        break;
+      default:
+        break;
+    }
 
     this.setState({ errors, [name]: value });
-  // }
+    // }
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    if(validateForm(this.state.errors)) {
-      console.info('Valid Form')
-      console.log(this.state.altid)
+    if (validateForm(this.state.errors)) {
+      console.info("Valid Form");
+      console.log(this.state.altid);
       console.log(this.state.fullName);
       let a = {
         requirement_name: this.state.fullName,
@@ -117,16 +117,16 @@ export default class CreateForm extends React.Component {
           console.log("Created Data ", data);
           // history.pushState({}, null, "/Crud");
           // window.history.pushState('', 'Crud', '/Crud');
-          window.location.href = "/Crud";
+          window.location.href = "/requirements";
           // navigate("/Crud")
         })
         .catch((err) => {
           console.error(err);
         });
-    }else{
-      console.error('Invalid Form')
+    } else {
+      console.error("Invalid Form");
     }
-  }
+  };
 
   render() {
     const { errors } = this.state;
@@ -169,9 +169,6 @@ export default class CreateForm extends React.Component {
                     onChange={this.handleChange}
                     required
                   ></input>
-                  {/* {errors.requireid.length > 0 && (
-                    <span className="error">{errors.requireid}</span>
-                  )} */}
                 </div>
                 <div className="form-group right">
                   <label for="priority">Priority</label>
@@ -233,7 +230,7 @@ export default class CreateForm extends React.Component {
 
             <div className="horizontal-group">
               <div className="form-group right">
-                <button type="reset" className="btn1">
+                <button type="reset" className="btn1" onClick={cancel}>
                   Cancel
                 </button>
                 <button className="btn" id="Save">
