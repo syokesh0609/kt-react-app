@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { ThemeContext } from "./ThemeContext";
 import SwitchButton from "./Button";
 import CreateForm from "./Components/CreateForm";
+import Treeview from "./Components/Treeview"
 import "./App.css";
 
 // import Validate from "./Components/Vlaidate"
@@ -36,7 +37,7 @@ function App() {
             <Route path="requirements" element={<Crud />} />
             <Route path="Form" element={<CreateForm />} />
             <Route path="UpdateForm" element={<UpdateForm />} />
-            {/* <Route path="validate" element={<Validate />} /> */}
+            <Route path="treeview" element={<Treeview />} />
           </Route>
         </Routes>
       </div>

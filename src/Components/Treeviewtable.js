@@ -104,7 +104,7 @@ function Crud() {
   }
 
   return (
-    <div className="Apptable">
+    <div className="Apptable1">
       <button className="new" onClick={add}>
         +
       </button>

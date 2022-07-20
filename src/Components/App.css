@@ -249,3 +249,9 @@ input:checked + .slider {
 .formuser{
   height: 500px;
 }
+
+.tss-tlx3x1-MUIDataTableToolbar-root {
+  background-color: #61bf7d!important;
+  color: black;
+  font-weight: bolder;
+}

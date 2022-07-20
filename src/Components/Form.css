@@ -20,6 +20,7 @@ select {
   border: 1px solid #a9a9a9;
   font-size: small;
   height: 35px;
+  font-weight: bolder;
   /* background: #f1f1f1; */
 }
 
@@ -127,6 +128,19 @@ a {
   float: right;
 }
 
+.btn2 {
+  background-color: blue !important;
+  padding: 10px;
+  background-color: white;
+  font-size: 17px;
+  border: 1px solid black;
+  color: white;
+  cursor: pointer;
+  /* background-color: #21b613!important; */
+  border-radius: 5px;
+  float: right;
+}
+
 #Save {
   margin-right: 16px;
   /* margin-left: 200px; */
@@ -152,15 +166,30 @@ a {
 }
 
 .new {
+  font-size: 40px;
   float: right;
   height: 64px;
   border: none;
-  background-color: lightblue;
+  background-color: #61bf7d!important;
   cursor: pointer;
+}
+
+.new:hover{
+  color: blue;
 }
 
 .error {
   color:#db2269;
   font-size: 0.8em;
   display: relative;
+}
+
+.Apptable{
+  margin: 20px;
+  min-height: 100vh;
+}
+
+input:disabled{
+  color: #8a8888; 
+  border: 1 px solid #8a8888;    
 }

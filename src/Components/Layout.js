@@ -26,6 +26,10 @@ const Layout = () => {
             Requirements
           </Link>
 
+          <Link to="/treeview" className="table">
+            TreeView
+          </Link>
+
           {/* <Link to="/validate" className="table">
             validate
           </Link> */}

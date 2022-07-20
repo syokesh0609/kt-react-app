@@ -122,6 +122,7 @@ const Val = () => {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
+          window.location.href = "/requirements"
         })
         .catch((err) => {
           console.error(err);
