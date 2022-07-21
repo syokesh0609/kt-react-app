@@ -193,3 +193,16 @@ input:disabled{
   color: #8a8888; 
   border: 1 px solid #8a8888;    
 }
+
+.link{
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.link:hover{
+  text-decoration: underline;
+  color: blue;
+  
+
+}

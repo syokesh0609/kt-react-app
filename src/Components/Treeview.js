@@ -8,6 +8,28 @@ import styles from "./styles";
 import TreeviewUpdate from "./TreeviewUpdate";
 import { useNavigate } from "react-router-dom";
 import { Divider } from "@material-ui/core";
+
+const sub_array = [];
+const sub_array1 = [];
+fetch("http://172.20.8.192:8000/getData?doc=all", {
+  method: "GET",
+})
+  .then((response) => response.json())
+  .then((data) => {
+    for (let i = 0; i < 5; i++) {
+      sub_array.push({ name: data[i].requirement_name });
+      // super_array.push(...sub_array.slice(0));
+    }
+    for (let i = 5; i < data.length; i++) {
+      sub_array1.push({ name: data[i].requirement_name });
+      // super_array.push(...sub_array.slice(0));
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+console.log(sub_array);
+
 const data1 = {
   name: "Test Case",
   toggled: true,
@@ -15,51 +37,11 @@ const data1 = {
   children: [
     {
       name: "Automation",
-      children: [
-        {
-          name: "Automation Testing",
-          model: "test 1 modal",
-        },
-
-        {
-          name: "Automation One",
-          model: "test 2 modal",
-        },
-
-        {
-          name: "Automation Two",
-          model: "test 3 modal",
-        },
-
-        {
-          name: "Automation Three",
-          model: "test 4 modal",
-        },
-
-        {
-          name: "Automation Four",
-          model: "test 5 modal",
-        },
-      ],
+      children: sub_array,
     },
     {
       name: "Manual",
-      children: [
-        {
-          name: "Manual Testing",
-          model: "test 1 modal",
-        },
-
-        {
-          name: "Manual One",
-          model: "test 2 modal",
-        },
-
-        {
-          name: "Manual Two",
-          model: "test 3 modal",
-        },
-      ],
+      children: sub_array1,
     },
   ],
 };
@@ -80,7 +62,7 @@ const Header = ({ onSelect, style, customStyles, node }) => {
 };
 
 const Hello = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [data, setData] = useState(data1);
   const [cursor, setCursor] = useState(false);
   const [dis, setDisable] = useState(true);
@@ -151,7 +133,7 @@ const Hello = () => {
     setDisable(false);
   }
 
-  function Cancel(){
+  function Cancel() {
     window.location.href = "/treeview";
   }
   console.log(Name);
@@ -240,15 +222,11 @@ const Hello = () => {
             <form className="formfield" onSubmit={handleSubmit}>
               <div className="form-header">
                 <div className="btn2" onClick={Edit}>
-                    Edit
-                  </div>
+                  Edit
+                </div>
                 <h1>
                   <i>Update#</i>
                 </h1>
-                
-
-
-
               </div>
               <label for="requuirement_name">
                 <b>Requirement Name</b>
@@ -349,12 +327,7 @@ const Hello = () => {
                   <button type="reset" className="btn1" onClick={Cancel}>
                     Cancel
                   </button>
-                  <button
-                    className="btn"
-                    id="Save"
-                    disabled={dis}
-                    
-                  >
+                  <button className="btn" id="Save" disabled={dis}>
                     Update
                   </button>
                 </div>
