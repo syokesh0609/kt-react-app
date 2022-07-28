@@ -30,13 +30,13 @@ const Layout = () => {
             TreeView
           </Link>
 
-          {/* <Link to="/validate" className="table">
-            validate
-          </Link> */}
+          <Link to="/repository" className="table">
+            Repository
+          </Link>
 
-          {/* <Link to="/UpdateForm" className="table">
-            Update_Form
-          </Link> */}
+          <Link to="/testaction" className="table">
+            Test
+          </Link>
 
           <Link to="/contact" className="contact">
             Contact

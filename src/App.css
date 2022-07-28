@@ -58,7 +58,7 @@ input {
   display: table-cell;
   border: 1px solid black;
   height: 30px;
-  font-size: 20px;
+  /* font-size: 20px; */
 }
 
 .head {

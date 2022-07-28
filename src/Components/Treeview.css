@@ -5,20 +5,23 @@ body {font-family: "Lato", sans-serif;}
 .tab {
   float: left;
   border: 1px solid #ccc;
-  background-color: #f1f1f1;
-  width: 30%;
+  background-color: white;
+  width: 20%;
   height: 90vh;
 }
 
-.css-f91fgu {
-    list-style: none;
-    background-color: #21252B;
-    margin: 0;
-    padding: 0;
-    color: black;
-    background-color: white;
-    font-family: lucida grande ,tahoma,verdana,arial,sans-serif;
-    font-size: 14px;
+.css-19lju9q {
+  list-style: none;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  color: black;
+  font-family: Apple-System,Arial,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,STXihei,sans-serif;
+  font-size: 0.9em;
+  padding-right: 16px;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
 }
 
 /* Style the buttons inside the tab */
@@ -51,13 +54,22 @@ body {font-family: "Lato", sans-serif;}
   float: left;
   padding: 0px 12px;
   border: 1px solid #ccc;
-  width: 70%;
+  width: 80%;
   border-left: none;
   height: 90vh;
+  overflow: auto;
 }
 
 .App1{
     margin: 20px;
     min-height: 90vh;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.Apptable1{
+  margin: 20px;
+}
+.inventory{
+  background-color: #61bf7d!important;
+  font-size: 30px;
+  margin-bottom: 10px;
 }

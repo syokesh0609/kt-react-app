@@ -5,7 +5,7 @@ export default {
         backgroundColor: "rgb(236, 236, 236)",
         margin: 0,
         padding: 0,
-        paddingRight: "16px",
+        // paddingRight: "16px",
         color: "black",
         fontFamily:
           "Apple-System,Arial,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,STXihei,sans-serif",

@@ -14,9 +14,11 @@ import { ThemeContext } from "./ThemeContext";
 import SwitchButton from "./Button";
 import CreateForm from "./Components/CreateForm";
 import Treeview from "./Components/Treeview"
+import Repository from "./Components/Repository"
 import "./App.css";
 
-// import Validate from "./Components/Vlaidate"
+
+import Testaction from "./Components/APxtest"
 
 function App() {
   const theme = useContext(ThemeContext);
@@ -38,6 +40,9 @@ function App() {
             <Route path="Form" element={<CreateForm />} />
             <Route path="UpdateForm" element={<UpdateForm />} />
             <Route path="treeview" element={<Treeview />} />
+            <Route path="repository" element={<Repository />} />
+            <Route path="repository/audioplayback" element={<Repository />} />
+            <Route path="testaction" element={<Testaction />} />
           </Route>
         </Routes>
       </div>

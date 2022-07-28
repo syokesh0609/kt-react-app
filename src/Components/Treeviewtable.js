@@ -5,9 +5,11 @@ import { useEffect } from "react";
 import "./Form.css";
 import { useNavigate } from "react-router-dom";
 import Treeview from "./Treeview";
+import Repository from "./Repository"
 
 function Treeviewtable() {
   const [Clickedval, setClick] = useState("");
+  const [Addnewrepo, setAdd] = useState("");
   //   const navigate = useNavigate();
   //   const [data, setData] = useState(data1);
   //   const [cursor, setCursor] = useState(false);
@@ -193,7 +195,9 @@ function Treeviewtable() {
     //  console.log(dataRows)
   };
   function add() {
-    navigate("/Form");
+    // navigate("/Form");
+    setAdd("add")
+    console.log(typeof(Addnewrepo))
   }
 
   function Edit() {
@@ -247,7 +251,7 @@ function Treeviewtable() {
       });
   };
 
-  if (Clickedval === "") {
+  if (Clickedval === "" && Addnewrepo === "") {
     return (
       <div className="Apptable1">
         <button className="new" onClick={add}>
@@ -262,7 +266,14 @@ function Treeviewtable() {
         />
       </div>
     );
-  } else {
+  }else if(Addnewrepo === "add"){
+    return(
+    <div className="Apptable1">
+        <Repository />
+      </div>
+    )
+  }
+   else {
     return (
       <div className="Apptable1">
         <div className="App">

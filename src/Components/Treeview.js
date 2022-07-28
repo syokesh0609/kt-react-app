@@ -190,6 +190,7 @@ const Hello = () => {
     return (
       <div className="App1">
         <div className="tab">
+          <div className="inventory"><center><p>Inventory</p></center></div>
           <Treebeard
             data={data}
             onToggle={onToggle}
@@ -209,6 +210,7 @@ const Hello = () => {
     return (
       <div className="App1">
         <div className="tab">
+        <div className="inventory"><center><p>Inventory</p></center></div>
           <Treebeard
             data={data}
             onToggle={onToggle}
