@@ -1,5 +1,6 @@
 .App {
-  min-height: 100vh;
+  min-height: 90.8vh;
+    overflow: auto;
 }
 
 .App-logo {
@@ -15,7 +16,8 @@
 
 .App-header {
   background-color: none;
-  min-height: 100vh;
+  min-height: 90.8vh;
+    overflow: auto;
   display: flex;
   flex-direction: column;
   align-items: center;

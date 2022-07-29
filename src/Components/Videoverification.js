@@ -17,7 +17,7 @@ const Videoverification = () => {
     setInputvideoplayFields(data);
  }
 
- const addFields = () => {
+ const clonevideoverification = () => {
   let newvideoplayfield = { videoverifydevice: '', videoverification: '', blurcount: '',numbercount:""}
 
   setInputvideoplayFields([...inputvideoverifyFields, newvideoplayfield])
@@ -43,6 +43,7 @@ const removevideoverifyFields = (index) => {
         <div className="audioform-header">
           <i>Video Verification</i>
           <div className="delicon" onClick={() => removevideoverifyFields(index)}> <DeleteIcon /></div>
+          <div className="copyicon" onClick={clonevideoverification}> <FileCopyIcon /></div>
          
         </div>
         <div className="insidediv">

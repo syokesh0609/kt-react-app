@@ -62,7 +62,8 @@ body {font-family: "Lato", sans-serif;}
 
 .App1{
     margin: 20px;
-    min-height: 90vh;
+    min-height: 90.8vh;
+    overflow: auto;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .Apptable1{

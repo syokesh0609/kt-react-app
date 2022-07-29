@@ -12,7 +12,7 @@ import FileCopyIcon from "@mui/icons-material/FileCopy";
 import DeleteIcon from "@mui/icons-material/Delete";
 // import { useLocation } from "react-router-dom";
 
-const Val = () => {
+const Repository = () => {
   const location = useLocation();
   const location1 = useLocation();
 
@@ -37,6 +37,8 @@ const Val = () => {
     casesteps: "",
     testactions: "",
     description: "",
+    delay: "",
+    unit: "",
     device: "",
     actiontype: "",
 
@@ -116,14 +118,19 @@ const Val = () => {
   // Video Verification===================================================================
 
   const [inputvideoverifyFields, setInputvideoverifyFields] = useState([
-    { videoverifydevice: '', videoverification: '', blurcount: '',numbercount:""}
-  ])
+    {
+      videoverifydevice: "",
+      videoverification: "",
+      blurcount: "",
+      numbercount: "",
+    },
+  ]);
 
   // APxtest=============================================================================
 
   const [inputapxtestFields, setInputapxtestFields] = useState([
-    {}
-  ])
+    { outputconnector: "" },
+  ]);
 
   const sub_array = [];
   fetch("http://172.20.8.192:8000/getData?doc=all", {
@@ -252,103 +259,100 @@ const Val = () => {
           case_steps: values.casesteps,
           created_by: "admin",
           description: values.description,
-          test_actions: [
-            //   finalaudioplaydata,
-            // finalaudioverifydata,
-            // finalvideoplaydata,
-            // finalvideoverifydata,
-            // {location.state}
-          ],
+          delay: values.delay,
+          unit: values.unit,
+          test_actions: [],
         },
       ];
 
+      // console.log(inputapxtestFields)
+
       // Audio Playback=======================================
+      if (values.testtype === "Automated") {
+        if (inputFields[0].audioplaydevice !== "") {
+          // console.log(inputFields);
+          for (let i = 0; i < inputFields.length; i++) {
+            let audioplaydata = {
+              action_type: "Audio Playback",
+              testaction_args: inputFields[i],
+            };
+            // query[0].test_actions.push(c)
+            query[0].test_actions.push(audioplaydata);
+          }
+        }
 
-      if (inputFields[0].audioplaydevice !== "") {
-        // console.log(inputFields);
-        for (let i = 0; i < inputFields.length; i++) {
-          let audioplaydata = {
-            action_type: "Audio Playback",
-            testaction_args: inputFields[i],
-          };
-          // query[0].test_actions.push(c)
-          query[0].test_actions.push(audioplaydata);
+        // Audio Verification=====================================================
+
+        if (inputaudioverifyFields[0].audioverifydevice !== "") {
+          // console.log(inputFields);
+          for (let i = 0; i < inputaudioverifyFields.length; i++) {
+            let audioverifydata = {
+              action_type: "Audio Verification",
+              testaction_args: inputaudioverifyFields[i],
+            };
+            query[0].test_actions.push(audioverifydata);
+          }
+        }
+
+        // Video Playback==========================================================
+
+        if (inputvideoplayFields[0].videoplaydevice !== "") {
+          // console.log(inputFields);
+          for (let i = 0; i < inputvideoplayFields.length; i++) {
+            let videoplaydata = {
+              action_type: "Video Playback",
+              testaction_args: inputvideoplayFields[i],
+            };
+            query[0].test_actions.push(videoplaydata);
+          }
+        }
+        // Video Verification=============================================================
+
+        if (inputvideoverifyFields[0].videoverifydevice !== "") {
+          // console.log(inputFields);
+          for (let i = 0; i < inputvideoverifyFields.length; i++) {
+            let videoverifydata = {
+              action_type: "Video Verification",
+              testaction_args: inputvideoverifyFields[i],
+            };
+            query[0].test_actions.push(videoverifydata);
+          }
+        }
+
+        // APxtest===============================================================
+
+        if (inputapxtestFields[0].outputconnector !== "") {
+          // console.log(inputFields);
+          for (let i = 0; i < inputapxtestFields.length; i++) {
+            let apxtestdata = {
+              action_type: "APxtest",
+              testaction_args: inputapxtestFields[i],
+            };
+            query[0].test_actions.push(apxtestdata);
+          }
         }
       }
-
-      // Audio Verification=====================================================
-
-      if (inputaudioverifyFields[0].audioverifydevice !== "") {
-        // console.log(inputFields);
-        for (let i = 0; i < inputaudioverifyFields.length; i++) {
-          let audioverifydata = {
-            action_type: "Audio Verification",
-            testaction_args: inputaudioverifyFields[i],
-          };
-          query[0].test_actions.push(audioverifydata);
-        }
-      }
-
-      // Video Playback==========================================================
-
-      if (inputvideoplayFields[0].videoplaydevice !== "") {
-        // console.log(inputFields);
-        for (let i = 0; i < inputvideoplayFields.length; i++) {
-          let videoplaydata = {
-            action_type: "Video Playback",
-            testaction_args: inputvideoplayFields[i],
-          };
-          query[0].test_actions.push(videoplaydata);
-        }
-      }
-
-      if (inputvideoverifyFields[0].videoverifydevice !== "") {
-        // console.log(inputFields);
-        for (let i = 0; i < inputvideoverifyFields.length; i++) {
-          let videoverifydata = {
-            action_type: "Video Verification",
-            testaction_args: inputvideoverifyFields[i],
-          };
-          query[0].test_actions.push(videoverifydata);
-        }
-      }
-
-      if (inputapxtestFields[0].audioformate !== "") {
-        // console.log(inputFields);
-        for (let i = 0; i < inputapxtestFields.length; i++) {
-          let apxtestdata = {
-            action_type: "APxtest",
-            testaction_args: inputapxtestFields[i],
-          };
-          query[0].test_actions.push(apxtestdata);
-        }
-      }
-
 
       console.log(query);
-      //   console.log(values);
-      //   // console.log(fst);
-      //   //   console.log(value)
 
-      //   let queryString = JSON.stringify(query);
-      //   fetch("http://172.20.8.192:8000/createData", {
-      //     method: "POST",
-      //     body: queryString,
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //   })
-      //     .then((response) => response.json())
-      //     .then((data) => {
-      //       console.log(data);
-      //       window.location.href = "/requirements";
-      //     })
-      //     .catch((err) => {
-      //       console.error(err);
-      //     });
-      // } else {
-      //   console.error("Invalid Form");
-      //   console.log(values);
+      let queryString = JSON.stringify(query[0]);
+      // console.log(queryString);
+
+      fetch("http://172.20.8.192:8000/createData", {
+        method: "POST",
+        body: queryString,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          // window.location.href = "/requirements";
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
   };
   // console.log(location.state)
@@ -408,22 +412,45 @@ const Val = () => {
     }
     if (values.testactions === "Video Verification") {
       setvideoverify("Videoverifytrue");
-      if(vv === "Videoverifytrue"){
-      let newvideoplayfield = { videoverifydevice: '', videoverification: '', blurcount: '',numbercount:""}
+      if (vv === "Videoverifytrue") {
+        let newvideoplayfield = {
+          videoverifydevice: "",
+          videoverification: "",
+          blurcount: "",
+          numbercount: "",
+        };
 
-      setInputvideoverifyFields([...inputvideoverifyFields, newvideoplayfield])
+        setInputvideoverifyFields([
+          ...inputvideoverifyFields,
+          newvideoplayfield,
+        ]);
       }
     }
     if (values.testactions === "APx Test") {
       setapxtest("Apxtesttrue");
-      if(apx === "Apxtesttrue"){
-        let newapxtestfield = {}
+      if (apx === "Apxtesttrue") {
+        let newapxtestfield = {};
 
-  setInputapxtestFields([...inputapxtestFields, newapxtestfield])
+        setInputapxtestFields([...inputapxtestFields, newapxtestfield]);
       }
     }
   }
   const { errors } = values;
+
+  // Audio Playback==========================================================================
+
+  const cloneaudioplayback = () => {
+    for (let i = 0; i < inputFields.length; i++) {
+      let newfield = {
+        audioplaydevice: inputFields[i].audioplaydevice,
+        bdplayermodel: inputFields[i].bdplayermodel,
+        bdplayerfilename: inputFields[i].bdplayerfilename,
+        rasberryfilename: inputFields[i].rasberryfilename,
+      };
+
+      setInputFields([...inputFields, newfield]);
+    }
+  };
 
   // Audio Verfication======================================================================
   const handleaudioverifyFormChange = (index, event) => {
@@ -438,6 +465,15 @@ const Val = () => {
     setInputaudioverifyFields(data);
   };
 
+  const cloneaudioverification = () => {
+    let newaudioverifyfield = {
+      audioverifydevice: "",
+      lowerlimit: "",
+      upperlimit: "",
+    };
+
+    setInputaudioverifyFields([...inputaudioverifyFields, newaudioverifyfield]);
+  };
   // Video Playback========================================================
 
   const handlevideoplayFormChange = (index, event) => {
@@ -452,19 +488,39 @@ const Val = () => {
     setInputvideoplayFields(data);
   };
 
+  const clonevideoplayback = () => {
+    let newvideoplayfield = {
+      videoplaydevice: "",
+      vprasperrymodel: "",
+      vprasperryfilename: "",
+    };
+
+    setInputvideoplayFields([...inputvideoplayFields, newvideoplayfield]);
+  };
+
   // Video Verification==================================================================
 
   const handlevideoverifyFormChange = (index, event) => {
     let data = [...inputvideoverifyFields];
     data[index][event.target.name] = event.target.value;
     setInputvideoverifyFields(data);
- }
+  };
 
   const removevideoverifyFields = (index) => {
     let data = [...inputvideoverifyFields];
-    data.splice(index, 1)
-    setInputvideoverifyFields(data)
-  }
+    data.splice(index, 1);
+    setInputvideoverifyFields(data);
+  };
+
+  const clonevideoverification = () => {
+    let newvideoverifyfield = {
+      videoverifydevice: "",
+      videoverification: "",
+      blurcount: "",
+      numbercount: "",
+    };
+    setInputvideoverifyFields([...inputvideoverifyFields, newvideoverifyfield]);
+  };
 
   // APxtest=============================================================================
 
@@ -472,13 +528,19 @@ const Val = () => {
     let data = [...inputapxtestFields];
     data[index][event.target.name] = event.target.value;
     setInputapxtestFields(data);
- }
+  };
 
- const removeapxtestFields = (index) => {
-  let data = [...inputapxtestFields];
-  data.splice(index, 1)
-  setInputapxtestFields(data)
-}
+  const removeapxtestFields = (index) => {
+    let data = [...inputapxtestFields];
+    data.splice(index, 1);
+    setInputapxtestFields(data);
+  };
+
+  const cloneapxtest = () => {
+    let newapxtestfield = {};
+
+    setInputapxtestFields([...inputapxtestFields, newapxtestfield]);
+  };
 
   return (
     <div className="App">
@@ -489,7 +551,7 @@ const Val = () => {
           </h1>
         </div>
         <div>
-          <label for="requuirement_name">
+          <label>
             <b>Requirement Name</b>
           </label>
           <input
@@ -504,7 +566,7 @@ const Val = () => {
             <span className="error">{errors.fullName}</span>
           )}
 
-          <label for="requuirement_details">
+          <label>
             <b>Requirement Details:</b>
           </label>
 
@@ -588,7 +650,7 @@ const Val = () => {
             <br></br>
           </div>
           <br></br>
-          <label for="description">
+          <label>
             <b>Description</b>
           </label>
           <br></br>
@@ -607,685 +669,932 @@ const Val = () => {
           <br></br>
           <br></br>
           {/* Automated Test======================================================================================================== */}
-
           {values.testtype === "Automated" ? (
             <div>
-              <div>
-                <label for="Testactions">
-                  <b>Test Actions:</b>
-                </label>
+              {values.testtype === "Automated" ? (
+                <div>
+                  <div>
+                    <label>
+                      <b>Test Actions:</b>
+                    </label>
 
-                <select
-                  className="actiondrop"
-                  name="testactions"
-                  // value={values.priority}
-                  onChange={handleChange}
-                >
-                  <option
-                    // value="actiontype"
-                    selected="selected"
-                    hidden="hidden"
-                    className="option_css"
-                  >
-                    Select Actions
-                  </option>
-                  <option value="Audio Playback">Audio Playback</option>
-                  <option value="Audio Verification">Audio Verification</option>
-                  <option value="Video Playback">Video Playback</option>
-                  <option value="Video Verification">Video Verification</option>
-                  <option value="APx Test">APx Test</option>
-                </select>
-                <button
-                  type="button"
-                  className="actionbtn"
-                  onClick={actionsubmit}
-                >
-                  Add
-                </button>
-              </div>
-              <div className="Row">
-                <div className="Column">
-                  {/* <label className="delay1" for="Delay">Delay</label> */}
+                    <select
+                      className="actiondrop"
+                      name="testactions"
+                      // value={values.priority}
+                      onChange={handleChange}
+                    >
+                      <option
+                        // value="actiontype"
+                        defaultValue="selected"
+                        hidden="hidden"
+                        className="option_css"
+                      >
+                        Select Actions
+                      </option>
+                      <option value="Audio Playback">Audio Playback</option>
+                      <option value="Audio Verification">
+                        Audio Verification
+                      </option>
+                      <option value="Video Playback">Video Playback</option>
+                      <option value="Video Verification">
+                        Video Verification
+                      </option>
+                      <option value="APx Test">APx Test</option>
+                    </select>
+                    <button
+                      type="button"
+                      className="actionbtn"
+                      onClick={actionsubmit}
+                    >
+                      Add
+                    </button>
+                  </div>
+                  <div className="Row">
+                    <div className="Column">
+                      {/* <label className="delay1" for="Delay">Delay</label> */}
 
-                  <input
-                    className="delay"
-                    type="number"
-                    placeholder="0"
-                    onChange={handleChange}
-                  />
+                      <input
+                        className="delay"
+                        type="number"
+                        name="delay"
+                        placeholder="0"
+                        onChange={handleChange}
+                      />
 
-                  <select className="unit" name="unit" onChange={handleChange}>
-                    <option value="ms">ms</option>
-                    <option value="sec">sec</option>
-                    <option value="min">min</option>
-                  </select>
+                      <select
+                        className="unit"
+                        name="unit"
+                        onChange={handleChange}
+                      >
+                        <option value="ms">ms</option>
+                        <option value="sec">sec</option>
+                        <option value="min">min</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ) : null}
+              ) : null}
 
-          {/* Test Actions============================================================ */}
-          {/* Auduio Playback================================================================================== */}
-          {ap === "AdioPlaybacktrue" ? (
-            <div className="fulldiv">
-              <form onSubmit={handleSubmit}>
-                {inputFields.map((input, index) => {
-                  return (
-                    <div className="Audioplayback">
-                      <div className="audioform-header">
-                        <i>Audio Playback</i>
-                        <div
-                          className="delicon"
-                          onClick={() => removeFields(index)}
-                        >
-                          {" "}
-                          <DeleteIcon />
-                        </div>
-                      </div>
-                      <div className="insidediv">
-                        {/* <label for="requuirement_name">
-            <b>Select Device</b>
-          </label> */}
-                        <b>Select Device:</b>{" "}
-                        <select
-                          className="device"
-                          name="audioplaydevice"
-                          onChange={(event) => handleFormChange(index, event)}
-                        >
-                          <option value="default">Select Device</option>
-                          <option value="BD Player">BD Player</option>
-                          <option value="Raspberry Pi">Raspberry Pi</option>
-                          <option value="Sound bar PI">Sound bar PI</option>
-                        </select>
-                        {inputFields[index].audioplaydevice === "BD Player" ? (
-                          <div>
-                            <div className="Modeldiv">
-                              <b>Model:</b>{" "}
-                              <select
-                                className="Model"
-                                name="bdplayermodel"
-                                onChange={(event) =>
-                                  handleFormChange(index, event)
-                                }
-                              >
-                                <option value="default">Select Modal</option>
-                                <option value="SONY">SONY</option>
-                                <option value="BDP">BDP</option>
-                              </select>
+              {/* Test Actions============================================================ */}
+              {/* Auduio Playback================================================================================== */}
+              {ap === "AdioPlaybacktrue" ? (
+                <div className="fulldiv">
+                  <form onSubmit={handleSubmit}>
+                    {inputFields.map((input, index) => {
+                      return (
+                        <div className="Audioplayback">
+                          <div className="audioform-header">
+                            <i>Audio Playback</i>
+
+                            <div
+                              className="delicon"
+                              onClick={() => removeFields(index)}
+                            >
+                              {" "}
+                              <DeleteIcon />
                             </div>
-                            <div className="buttondiv">
-                              <button
-                                type="button"
-                                className="actionbtn"
-                                onChange={(event) =>
-                                  handleFormChange(index, event)
-                                }
-                              >
-                                Add Command
-                              </button>
-                            </div>
-                            <div className="filediv">
-                              <b>Filename:</b>{" "}
-                              <select
-                                className="filename"
-                                name="bdplayerfilename"
-                                onChange={(event) =>
-                                  handleFormChange(index, event)
-                                }
-                              >
-                                <option value="default">Select file</option>
-                                <option value="sample.ac3">sample.ac3</option>
-                                <option value="sample.wav">sample.wav</option>
-                              </select>
+                            <div
+                              className="copyicon"
+                              onClick={cloneaudioplayback}
+                            >
+                              {" "}
+                              <FileCopyIcon />
                             </div>
                           </div>
-                        ) : inputFields[index].audioplaydevice ===
-                          "Raspberry Pi" ? (
-                          <div className="Modeldiv">
-                            <b>Filename:</b>{" "}
+                          <div className="insidediv">
+                            {/* <label for="requuirement_name">
+            <b>Select Device</b>
+          </label> */}
+                            <b>Select Device:</b>{" "}
                             <select
-                              className="filename"
-                              name="rasberryfilename"
+                              className="device"
+                              name="audioplaydevice"
                               onChange={(event) =>
                                 handleFormChange(index, event)
                               }
                             >
-                              <option value="default">Select file</option>
-                              <option value="sample.ac3">sample.ac3</option>
-                              <option value="sample.wav">sample.wav</option>
+                              <option value="default">Select Device</option>
+                              <option value="BD Player">BD Player</option>
+                              <option value="Raspberry Pi">Raspberry Pi</option>
+                              <option value="Sound bar PI">Sound bar PI</option>
                             </select>
+                            {inputFields[index].audioplaydevice ===
+                            "BD Player" ? (
+                              <div>
+                                <div className="Modeldiv">
+                                  <b>Model:</b>{" "}
+                                  <select
+                                    className="Model"
+                                    name="bdplayermodel"
+                                    onChange={(event) =>
+                                      handleFormChange(index, event)
+                                    }
+                                  >
+                                    <option value="default">
+                                      Select Modal
+                                    </option>
+                                    <option value="SONY">SONY</option>
+                                    <option value="BDP">BDP</option>
+                                  </select>
+                                </div>
+                                <div className="buttondiv">
+                                  <button
+                                    type="button"
+                                    className="actionbtn"
+                                    onChange={(event) =>
+                                      handleFormChange(index, event)
+                                    }
+                                  >
+                                    Add Command
+                                  </button>
+                                </div>
+                                <div className="filediv">
+                                  <b>Filename:</b>{" "}
+                                  <select
+                                    className="filename"
+                                    name="bdplayerfilename"
+                                    onChange={(event) =>
+                                      handleFormChange(index, event)
+                                    }
+                                  >
+                                    <option value="default">Select file</option>
+                                    <option value="sample.ac3">
+                                      sample.ac3
+                                    </option>
+                                    <option value="sample.wav">
+                                      sample.wav
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+                            ) : inputFields[index].audioplaydevice ===
+                              "Raspberry Pi" ? (
+                              <div className="Modeldiv">
+                                <b>Filename:</b>{" "}
+                                <select
+                                  className="filename"
+                                  name="rasberryfilename"
+                                  onChange={(event) =>
+                                    handleFormChange(index, event)
+                                  }
+                                >
+                                  <option value="default">Select file</option>
+                                  <option value="sample.ac3">sample.ac3</option>
+                                  <option value="sample.wav">sample.wav</option>
+                                </select>
+                              </div>
+                            ) : inputFields.audioplaydevice ===
+                              "Sound br PI" ? (
+                              <div></div>
+                            ) : null}
                           </div>
-                        ) : inputFields.audioplaydevice === "Sound br PI" ? (
-                          <div></div>
-                        ) : null}
-                      </div>
-                    </div>
-                  );
-                })}
-              </form>
-            </div>
-          ) : null}
-          {/* Audio Verfication======================================================================== */}
-
-          {av === "AdioVerifytrue" ? (
-            <div>
-              <form onSubmit={handleSubmit}>
-                {inputaudioverifyFields.map((input, index) => {
-                  return (
-                    <div className="Audioplayback">
-                      <div className="audioform-header">
-                        <i>Audio Verification</i>
-                        <div
-                          className="delicon"
-                          onClick={() => removeaudioverifyFields(index)}
-                        >
-                          {" "}
-                          <DeleteIcon />
                         </div>
-                      </div>
-                      <div className="insidediv">
-                        {/* <label for="requuirement_name">
+                      );
+                    })}
+                  </form>
+                </div>
+              ) : null}
+              {/* Audio Verfication======================================================================== */}
+
+              {av === "AdioVerifytrue" ? (
+                <div>
+                  <form onSubmit={handleSubmit}>
+                    {inputaudioverifyFields.map((input, index) => {
+                      return (
+                        <div className="Audioplayback">
+                          <div className="audioform-header">
+                            <i>Audio Verification</i>
+                            <div
+                              className="delicon"
+                              onClick={() => removeaudioverifyFields(index)}
+                            >
+                              {" "}
+                              <DeleteIcon />
+                            </div>
+                            <div
+                              className="copyicon"
+                              onClick={cloneaudioverification}
+                            >
+                              {" "}
+                              <FileCopyIcon />
+                            </div>
+                          </div>
+                          <div className="insidediv">
+                            {/* <label for="requuirement_name">
             <b>Select Device</b>
           </label> */}
-                        <b>Select Device:</b>{" "}
-                        <select
-                          className="device"
-                          name="audioverifydevice"
-                          onChange={(event) =>
-                            handleaudioverifyFormChange(index, event)
-                          }
-                        >
-                          <option value="default">Select Device</option>
-                          <option value="Microphone(AC)">Microphone(AC)</option>
-                          <option value="Audyssey">Audyssey</option>
-                        </select>
-                        <br></br>
-                        {inputaudioverifyFields[index].audioverifydevice ===
-                          "Microphone(AC)" ||
-                        inputaudioverifyFields[index].audioverifydevice ===
-                          "Audyssey" ? (
-                          <div>
-                            <div className="lowerdiv">
-                              <b>Lower Limit:</b>{" "}
-                              <input
-                                type="number"
-                                className="Lower"
-                                name="lowerlimit"
-                                placeholder="0"
-                                onChange={(event) =>
-                                  handleaudioverifyFormChange(index, event)
-                                }
-                              ></input>
-                            </div>
+                            <b>Select Device:</b>{" "}
+                            <select
+                              className="device"
+                              name="audioverifydevice"
+                              onChange={(event) =>
+                                handleaudioverifyFormChange(index, event)
+                              }
+                            >
+                              <option value="default">Select Device</option>
+                              <option value="Microphone(AC)">
+                                Microphone(AC)
+                              </option>
+                              <option value="Audyssey">Audyssey</option>
+                            </select>
                             <br></br>
-                            {/* <div className="buttondiv">
+                            {inputaudioverifyFields[index].audioverifydevice ===
+                              "Microphone(AC)" ||
+                            inputaudioverifyFields[index].audioverifydevice ===
+                              "Audyssey" ? (
+                              <div>
+                                <div className="lowerdiv">
+                                  <b>Lower Limit:</b>{" "}
+                                  <input
+                                    type="number"
+                                    className="Lower"
+                                    name="lowerlimit"
+                                    placeholder="0"
+                                    onChange={(event) =>
+                                      handleaudioverifyFormChange(index, event)
+                                    }
+                                  ></input>
+                                </div>
+                                <br></br>
+                                {/* <div className="buttondiv">
               <button type="button" className="actionbtn">
               Add Command
             </button>
             </div> */}
-                            <div className="upperdiv">
-                              <b>Upper Limit:</b>{" "}
-                              <input
-                                type="number"
-                                className="Upper"
-                                name="upperlimit"
-                                placeholder="0"
-                                onChange={(event) =>
-                                  handleaudioverifyFormChange(index, event)
-                                }
-                              ></input>
+                                <div className="upperdiv">
+                                  <b>Upper Limit:</b>{" "}
+                                  <input
+                                    type="number"
+                                    className="Upper"
+                                    name="upperlimit"
+                                    placeholder="0"
+                                    onChange={(event) =>
+                                      handleaudioverifyFormChange(index, event)
+                                    }
+                                  ></input>
+                                </div>
+                              </div>
+                            ) : null}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </form>
+                </div>
+              ) : null}
+
+              {/* Video Playback================================================================ */}
+
+              {vp === "Videoplaytrue" ? (
+                <div>
+                  <form onSubmit={handleSubmit}>
+                    {inputvideoplayFields.map((input, index) => {
+                      return (
+                        <div className="Audioplayback">
+                          <div className="audioform-header">
+                            <i>Video Playback</i>
+                            <div
+                              className="delicon"
+                              onClick={() => removevideoplayFields(index)}
+                            >
+                              {" "}
+                              <DeleteIcon />
+                            </div>
+                            <div
+                              className="copyicon"
+                              onClick={clonevideoplayback}
+                            >
+                              {" "}
+                              <FileCopyIcon />
                             </div>
                           </div>
-                        ) : null}
-                      </div>
-                    </div>
-                  );
-                })}
-              </form>
-            </div>
-          ) : null}
-
-          {/* Video Playback================================================================ */}
-
-          {vp === "Videoplaytrue" ? (
-            <div>
-              <form onSubmit={handleSubmit}>
-                {inputvideoplayFields.map((input, index) => {
-                  return (
-                    <div className="Audioplayback">
-                      <div className="audioform-header">
-                        <i>Video Playback</i>
-                        <div
-                          className="delicon"
-                          onClick={() => removevideoplayFields(index)}
-                        >
-                          {" "}
-                          <DeleteIcon />
-                        </div>
-                      </div>
-                      <div className="insidediv">
-                        {/* <label for="requuirement_name">
+                          <div className="insidediv">
+                            {/* <label for="requuirement_name">
             <b>Select Device</b>
           </label> */}
-                        <b>Select Device:</b>{" "}
-                        <select
-                          className="device"
-                          name="videoplaydevice"
-                          onChange={(event) =>
-                            handlevideoplayFormChange(index, event)
-                          }
-                        >
-                          <option value="default">Select Device</option>
-                          <option value="Rasperry Pi">Rasperry Pi</option>
-                        </select>
-                        {inputvideoplayFields[index].videoplaydevice ===
-                        "Rasperry Pi" ? (
-                          <div>
-                            <div className="Modeldiv1">
-                              <b>Resolution Type:</b>{" "}
+                            <b>Select Device:</b>{" "}
+                            <select
+                              className="device"
+                              name="videoplaydevice"
+                              onChange={(event) =>
+                                handlevideoplayFormChange(index, event)
+                              }
+                            >
+                              <option value="default">Select Device</option>
+                              <option value="Rasperry Pi">Rasperry Pi</option>
+                            </select>
+                            {inputvideoplayFields[index].videoplaydevice ===
+                            "Rasperry Pi" ? (
+                              <div>
+                                <div className="Modeldiv1">
+                                  <b>Resolution Type:</b>{" "}
+                                  <select
+                                    className="Model1"
+                                    name="vprasperrymodel"
+                                    onChange={(event) =>
+                                      handlevideoplayFormChange(index, event)
+                                    }
+                                  >
+                                    <option value="default">
+                                      Select Resolution
+                                    </option>
+                                    <option value="CEA MODE 1">
+                                      CEA MODE 1
+                                    </option>
+                                    <option value="CEA MODE 4">
+                                      CEA MODE 4
+                                    </option>
+                                    <option value="CEA MODE 9">
+                                      CEA MODE 9
+                                    </option>
+                                    <option value="Default">Default</option>
+                                  </select>
+                                </div>
+                                {/* <div className="buttondiv">
+              <button type="button" className="actionbtn">
+              Add Command
+            </button>
+            </div> */}
+                                <div className="filediv1">
+                                  <b>Filename:</b>{" "}
+                                  <input
+                                    type="text"
+                                    className="filenameinp"
+                                    name="vprasperryfilename"
+                                    placeholder="Enter filename Here"
+                                    onChange={(event) =>
+                                      handlevideoplayFormChange(index, event)
+                                    }
+                                  ></input>
+                                </div>
+                              </div>
+                            ) : null}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </form>
+                  {/* <button onClick={addFields}>Add More..</button>
+      <button onClick={submit}>Submit</button> */}
+                </div>
+              ) : null}
+
+              {/* Video Verification================================================================== */}
+
+              {vv === "Videoverifytrue" ? (
+                <div>
+                  <form onSubmit={handleSubmit}>
+                    {inputvideoverifyFields.map((input, index) => {
+                      return (
+                        <div className="Audioplayback">
+                          <div className="audioform-header">
+                            <i>Video Verification</i>
+                            <div
+                              className="delicon"
+                              onClick={() => removevideoverifyFields(index)}
+                            >
+                              {" "}
+                              <DeleteIcon />
+                            </div>
+                            <div
+                              className="copyicon"
+                              onClick={clonevideoverification}
+                            >
+                              {" "}
+                              <FileCopyIcon />
+                            </div>
+                          </div>
+                          <div className="insidediv">
+                            <div className="selectdev">
+                              <b>Select Device:</b>{" "}
                               <select
-                                className="Model1"
-                                name="vprasperrymodel"
+                                className="device"
+                                name="videoverifydevice"
                                 onChange={(event) =>
-                                  handlevideoplayFormChange(index, event)
+                                  handlevideoverifyFormChange(index, event)
                                 }
                               >
-                                <option value="default">
-                                  Select Resolution
-                                </option>
-                                <option value="CEA MODE 1">CEA MODE 1</option>
-                                <option value="CEA MODE 4">CEA MODE 4</option>
-                                <option value="CEA MODE 9">CEA MODE 9</option>
-                                <option value="Default">Default</option>
+                                <option value="default">Select Device</option>
+                                <option value="WebCam(PC)">WebCam(PC)</option>
                               </select>
                             </div>
-                            {/* <div className="buttondiv">
-              <button type="button" className="actionbtn">
-              Add Command
-            </button>
-            </div> */}
-                            <div className="filediv1">
-                              <b>Filename:</b>{" "}
-                              <input
-                                type="text"
-                                className="filenameinp"
-                                name="vprasperryfilename"
-                                placeholder="Enter filename Here"
+                            <div className="selecttype">
+                              <b>Verification Type:</b>{" "}
+                              <select
+                                className="device"
+                                name="videoverification"
                                 onChange={(event) =>
-                                  handlevideoplayFormChange(index, event)
+                                  handlevideoverifyFormChange(index, event)
                                 }
-                              ></input>
+                              >
+                                <option value="default">Select Device</option>
+                                <option value="Blur Verification">
+                                  Blur Verification
+                                </option>
+                              </select>
                             </div>
-                          </div>
-                        ) : null}
-                      </div>
-                    </div>
-                  );
-                })}
-              </form>
-              {/* <button onClick={addFields}>Add More..</button>
-      <button onClick={submit}>Submit</button> */}
-            </div>
-          ) : null}
-
-{/* Video Verification================================================================== */}
-
-          {vv === "Videoverifytrue" ? <div>
-      <form onSubmit={handleSubmit}>
-      {inputvideoverifyFields.map((input, index) => {
-          return (
-        <div className="Audioplayback">
-        <div className="audioform-header">
-          <i>Video Verification</i>
-          <div className="delicon" onClick={() => removevideoverifyFields(index)}> <DeleteIcon /></div>
-         
-        </div>
-        <div className="insidediv">
-          <div className="selectdev">
-          <b>Select Device:</b>{" "}
-          <select className="device" name="videoverifydevice" onChange={event => handlevideoverifyFormChange(index, event)}>
-            <option value="default">Select Device</option>
-            <option value="WebCam(PC)">WebCam(PC)</option>
-          </select>
-          </div>
-          <div className="selecttype">
-          <b>Verification Type:</b>{" "}
-          <select className="device" name="videoverification" onChange={event => handlevideoverifyFormChange(index, event)}>
-            <option value="default">Select Device</option>
-            <option value="Blur Verification">Blur Verification</option>
-          </select>
-          </div>
-          {inputvideoverifyFields[index].videoverification === "Blur Verification" ? (
-            <div>
-                <div className="Modeldiv">
-              <b>No.of blur count</b>{" "}
-              <select className="Model" name="blurcount" onChange={event => handlevideoverifyFormChange(index, event)}>
-                <option value="default">Select Modal</option>
-                <option value="is equal to">is equal to</option>
-                <option value="is less than">is less than</option>
-                <option value="is greater than">is greater than</option>
-              </select>
-              {/* </div>
+                            {inputvideoverifyFields[index].videoverification ===
+                            "Blur Verification" ? (
+                              <div>
+                                <div className="Modeldiv">
+                                  <b>No.of blur count</b>{" "}
+                                  <select
+                                    className="Model"
+                                    name="blurcount"
+                                    onChange={(event) =>
+                                      handlevideoverifyFormChange(index, event)
+                                    }
+                                  >
+                                    <option value="default">
+                                      Select Modal
+                                    </option>
+                                    <option value="is equal to">
+                                      is equal to
+                                    </option>
+                                    <option value="is less than">
+                                      is less than
+                                    </option>
+                                    <option value="is greater than">
+                                      is greater than
+                                    </option>
+                                  </select>
+                                  {/* </div>
               <div className="filediv"> */}
-               <input type="number" className="Upper" name="numbercount" placeholder="0" onChange={event => handlevideoverifyFormChange(index, event)}></input>
-               </div>
-              
+                                  <input
+                                    type="number"
+                                    className="Upper"
+                                    name="numbercount"
+                                    placeholder="0"
+                                    onChange={(event) =>
+                                      handlevideoverifyFormChange(index, event)
+                                    }
+                                  ></input>
+                                </div>
+                              </div>
+                            ) : null}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </form>
+                </div>
+              ) : null}
+
+              {/* APxtest ================================================================================= */}
+              {apx === "Apxtesttrue" ? (
+                <div>
+                  <form onSubmit={handleSubmit}>
+                    {inputapxtestFields.map((input, index) => {
+                      return (
+                        <div className="Audioplayback">
+                          <div className="audioform-header">
+                            <i>APx Test</i>
+                            <div
+                              className="delicon"
+                              onClick={() => removeapxtestFields(index)}
+                            >
+                              {" "}
+                              <DeleteIcon />
+                            </div>
+                            <div className="copyicon" onClick={cloneapxtest}>
+                              {" "}
+                              <FileCopyIcon />
+                            </div>
+                            {/* <div className="copyicon" > <FileCopyIcon /></div> */}
+                          </div>
+                          <div className="insidediv">
+                            <div className="container12">
+                              {/* <div className="filediv"><input type="file" className="file"></input></div> */}
+                              <div className="boxapx">
+                                <div className="Row">
+                                  <div className="Column">
+                                    {/* <label for="requuirement_id">Requirement ID</label> */}
+                                    Output Connector
+                                    <select
+                                      name="outputconnector"
+                                      //   value={values.priority}
+                                      className="outconnector"
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    >
+                                      <option value="default">
+                                        Select Connector
+                                      </option>
+                                      <option value="Analog Unbalanced">
+                                        Analog Unbalanced
+                                      </option>
+                                      <option value="Analog Balanced">
+                                        Analog Balanced
+                                      </option>
+                                      <option value="Digital Unbalanced">
+                                        Digital Unbalanced
+                                      </option>
+                                      <option value="Digital Balanced">
+                                        Digital Balanced
+                                      </option>
+                                      <option value="Digital Optical">
+                                        Digital Optical
+                                      </option>
+                                      <option value="HDMI Source">
+                                        HDMI Source
+                                      </option>
+                                      <option value="HDMI ARC Tx">
+                                        HDMI ARC Tx
+                                      </option>
+                                      <option value="Bluetooth">
+                                        Bluetooth
+                                      </option>
+                                      <option value="Digital Seriel">
+                                        Digital Seriel
+                                      </option>
+                                      <option value="PDM">PDM</option>
+                                      <option value="Tranceducer">
+                                        Tranceducer
+                                      </option>
+                                      <option value="ASIO">ASIO</option>
+                                      <option value="None(External)">
+                                        None(External)
+                                      </option>
+                                    </select>
+                                  </div>
+                                  <div className="Column">
+                                    {/* <label for="Alt_id">Alt ID</label> */}
+                                    Waveform
+                                    <select
+                                      name="waveform"
+                                      className="waveform"
+                                      //   value={values.priority}
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    >
+                                      <option value="default">
+                                        Select Connector
+                                      </option>
+                                      <option value="f.wave">f.wave</option>
+                                      <option value="Sine">Sine</option>
+                                      <option value="Square">Square</option>
+                                      <option value="Noice">Noice</option>
+                                      <option value="Sine, Dual">
+                                        Sine, Dual
+                                      </option>
+                                      <option value="Sine, Var Phase">
+                                        Sine, Var Phase
+                                      </option>
+                                      <option value="Browse File">
+                                        Browse File
+                                      </option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <div className="Row">
+                                  <div className="Column">
+                                    {/* <label for="priority">Priority</label> */}
+                                    Output Channel
+                                    <input
+                                      type="number"
+                                      className="outchannel"
+                                      //   value="admin"
+                                      name="outputchannel"
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    ></input>
+                                  </div>
+                                  <div className="Column">
+                                    {/* <label for="priority">Priority</label> */}
+                                    Level
+                                    <input
+                                      type="text"
+                                      className="level"
+                                      name="level"
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    ></input>
+                                  </div>
+                                </div>
+                                <div className="Row">
+                                  <div className="Column">
+                                    {/* <label for="requuirement_id">Requirement ID</label> */}
+                                    Input Connector
+                                    <select
+                                      name="inputconnector"
+                                      className="inconnector"
+                                      //   value={values.priority}
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    >
+                                      <option value="default">
+                                        Select Connector
+                                      </option>
+                                      <option value="Analog Unbalanced">
+                                        Analog Unbalanced
+                                      </option>
+                                      <option value="Analog Balanced">
+                                        Analog Balanced
+                                      </option>
+                                      <option value="Digital Unbalanced">
+                                        Digital Unbalanced
+                                      </option>
+                                      <option value="Digital Balanced">
+                                        Digital Balanced
+                                      </option>
+                                      <option value="Digital Optical">
+                                        Digital Optical
+                                      </option>
+                                      <option value="HDMI Source">
+                                        HDMI Source
+                                      </option>
+                                      <option value="HDMI ARC Tx">
+                                        HDMI ARC Tx
+                                      </option>
+                                      <option value="Bluetooth">
+                                        Bluetooth
+                                      </option>
+                                      <option value="Digital Seriel">
+                                        Digital Seriel
+                                      </option>
+                                      <option value="PDM">PDM</option>
+                                      <option value="Tranceducer">
+                                        Tranceducer
+                                      </option>
+                                      <option value="ASIO">ASIO</option>
+                                      <option value="None(External)">
+                                        None(External)
+                                      </option>
+                                    </select>
+                                  </div>
+                                  <div className="Column">
+                                    {/* <label for="priority">Priority</label> */}
+                                    Frequency
+                                    <input
+                                      type="text"
+                                      className="frequency"
+                                      name="frequency"
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    ></input>
+                                  </div>
+                                </div>
+                                <div className="Row">
+                                  <div className="Column">
+                                    {/* <label for="priority">Priority</label> */}
+                                    Input Channel
+                                    <input
+                                      type="number"
+                                      className="inchannel"
+                                      name="inputchannel"
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    ></input>
+                                  </div>
+                                  <div className="Column">
+                                    {/* <label for="priority">Priority</label> */}
+                                    Description
+                                    <input
+                                      type="text"
+                                      className="desci"
+                                      name="frequency"
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    ></input>
+                                  </div>
+                                </div>
+                                <div className="Row">
+                                  <div className="Column">
+                                    {/* <label for="priority">Priority</label> */}
+                                    Sample Rate
+                                    <input
+                                      type="text"
+                                      className="samplerate"
+                                      name="samplerate"
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    ></input>
+                                  </div>
+                                  <div className="Column">
+                                    {/* <label for="Alt_id">Alt ID</label> */}
+                                    Audio Format
+                                    <select
+                                      name="audioformate"
+                                      className="audiofromate"
+                                      //   value={values.priority}
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    >
+                                      <option value="default">
+                                        Select Format
+                                      </option>
+                                      <option value="Linear 2Ch Layout0">
+                                        Linear 2Ch Layout0
+                                      </option>
+                                      <option value="Linear 8Ch Layout1">
+                                        Linear 8Ch Layout1
+                                      </option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="bottomdiv">
+                                <div className="Row">
+                                  <div className="Column">
+                                    <label>
+                                      <b>Signal to Noise Ratio</b>
+                                    </label>
+                                    Waveform
+                                    <select
+                                      name="snrwaveform"
+                                      className="waveform"
+                                      //   value={values.priority}
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    >
+                                      <option value="default">
+                                        Select Connector
+                                      </option>
+                                      <option value="f.wave">f.wave</option>
+                                      <option value="Sine">Sine</option>
+                                      <option value="Square">Square</option>
+                                      <option value="Noice">Noice</option>
+                                      <option value="Sine, Dual">
+                                        Sine, Dual
+                                      </option>
+                                      <option value="Sine, Var Phase">
+                                        Sine, Var Phase
+                                      </option>
+                                      <option value="Browse File">
+                                        Browse File
+                                      </option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <div className="Row">
+                                  <div className="Column">
+                                    {/* <label for="priority">Priority</label> */}
+                                    Level
+                                    <input
+                                      type="text"
+                                      className="level"
+                                      name="snrlevel"
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    ></input>
+                                  </div>
+                                </div>
+                                <div className="Row">
+                                  <div className="Column">
+                                    {/* <label for="priority">Priority</label> */}
+                                    Frequency
+                                    <input
+                                      type="text"
+                                      className="level"
+                                      name="snrfrequency"
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    ></input>
+                                  </div>
+                                </div>
+
+                                <div className="Row">
+                                  <div className="Column">
+                                    <label>
+                                      <b>Level and Gain</b>
+                                    </label>
+                                    Waveform
+                                    <select
+                                      name="lgwaveform"
+                                      className="waveform"
+                                      //   value={values.priority}
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    >
+                                      <option value="default">
+                                        Select Connector
+                                      </option>
+                                      <option value="f.wave">f.wave</option>
+                                      <option value="Sine">Sine</option>
+                                      <option value="Square">Square</option>
+                                      <option value="Noice">Noice</option>
+                                      <option value="Sine, Dual">
+                                        Sine, Dual
+                                      </option>
+                                      <option value="Sine, Var Phase">
+                                        Sine, Var Phase
+                                      </option>
+                                      <option value="Browse File">
+                                        Browse File
+                                      </option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <div className="Row">
+                                  <div className="Column">
+                                    {/* <label for="priority">Priority</label> */}
+                                    Level
+                                    <input
+                                      type="text"
+                                      className="level"
+                                      name="lglevel"
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    ></input>
+                                  </div>
+                                </div>
+                                <div className="Row">
+                                  <div className="Column">
+                                    {/* <label for="priority">Priority</label> */}
+                                    Frequency
+                                    <input
+                                      type="text"
+                                      className="level"
+                                      name="lgfrequency"
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    ></input>
+                                  </div>
+                                </div>
+                                <div className="Row">
+                                  <div className="Column">
+                                    <label>
+                                      <b>Frequency Response</b>
+                                    </label>
+                                    Start Frequency
+                                    <input
+                                      type="text"
+                                      className="level"
+                                      name="startfrequency"
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    ></input>
+                                  </div>
+                                </div>
+                                <div className="Row">
+                                  <div className="Column">
+                                    {/* <label for="priority">Priority</label> */}
+                                    Level
+                                    <input
+                                      type="text"
+                                      className="level"
+                                      name="frlevel"
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    ></input>
+                                  </div>
+                                </div>
+                                <div className="Row">
+                                  <div className="Column">
+                                    {/* <label for="priority">Priority</label> */}
+                                    Stop Frequency
+                                    <input
+                                      type="text"
+                                      className="level"
+                                      name="stopfrequency"
+                                      onChange={(event) =>
+                                        handleapxtestFormChange(index, event)
+                                      }
+                                    ></input>
+                                  </div>
+                                </div>
+                              </div>
+                              <br></br>
+                              <br></br>
+                            </div>
+                            <br></br>
+
+                            <br></br>
+                            <br></br>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </form>
+                </div>
+              ) : null}
             </div>
           ) : null}
-        </div>
-        </div>
-        )
-      })}
-      </form>
-    </div> : null}
-
-{/* APxtest ================================================================================= */}
-          {apx === "Apxtesttrue" ? <div>
-      <form onSubmit={handleSubmit}>
-      {inputapxtestFields.map((input, index) => {
-          return (
-        <div className="Audioplayback">
-        <div className="audioform-header">
-          <i>APx Test</i>
-          <div className="delicon" onClick={() => removeapxtestFields(index)}> <DeleteIcon /></div>
-         {/* <div className="copyicon" > <FileCopyIcon /></div> */}
-        </div>
-        <div className="insidediv">
-
-          <div className="container12">
-            {/* <div className="filediv"><input type="file" className="file"></input></div> */}
-            <div className="boxapx">
-            <div className="Row">
-              <div className="Column">
-                {/* <label for="requuirement_id">Requirement ID</label> */}
-                Output Connector<select
-                  name="outputconnector"
-                //   value={values.priority}
-                className="outconnector"
-                onChange={event => handleapxtestFormChange(index, event)}
-                >
-                  <option value="default">Select Connector</option>
-                  <option value="Analog Unbalanced">Analog Unbalanced</option>
-                  <option value="Analog Balanced">Analog Balanced</option>
-                  <option value="Digital Unbalanced">Digital Unbalanced</option>
-                  <option value="Digital Balanced">Digital Balanced</option>
-                  <option value="Digital Optical">Digital Optical</option>
-                  <option value="HDMI Source">HDMI Source</option>
-                  <option value="HDMI ARC Tx">HDMI ARC Tx</option>
-                  <option value="Bluetooth">Bluetooth</option>
-                  <option value="Digital Seriel">Digital Seriel</option>
-                  <option value="PDM">PDM</option>
-                  <option value="Tranceducer">Tranceducer</option>
-                  <option value="ASIO">ASIO</option>
-                  <option value="None(External)">None(External)</option>
-                </select>
-              </div>
-              <div className="Column">
-                {/* <label for="Alt_id">Alt ID</label> */}
-                Waveform<select
-                  name="waveform"
-                  className="waveform"
-                //   value={values.priority}
-                onChange={event => handleapxtestFormChange(index, event)}
-                >
-                    <option value="default">Select Connector</option>
-                  <option value="f.wave">f.wave</option>
-                  <option value="Sine">Sine</option>
-                  <option value="Square">Square</option>
-                  <option value="Noice">Noice</option>
-                  <option value="Sine, Dual">Sine, Dual</option>
-                  <option value="Sine, Var Phase">Sine, Var Phase</option>
-                  <option value="Browse File">Browse File</option>
-
-                </select>
-              </div>
-            </div>
-
-            <div className="Row">
-            <div className="Column">
-                {/* <label for="priority">Priority</label> */}
-                Output Channel<input
-                  type="number"
-                  className="outchannel"
-                //   value="admin"
-                  name="outputchannel"
-                  onChange={event => handleapxtestFormChange(index, event)}
-                
-                ></input>
-              </div>
-              <div className="Column">
-                {/* <label for="priority">Priority</label> */}
-                Level<input
-                  type="text"
-                  className="level"
-                  name="level"
-                  onChange={event => handleapxtestFormChange(index, event)}
-                ></input>
-              </div>
-              
-            </div>
-            <div className="Row">
-              <div className="Column">
-                {/* <label for="requuirement_id">Requirement ID</label> */}
-                Input Connector<select
-                  name="inputconnector"
-                  className="inconnector"
-                //   value={values.priority}
-                onChange={event => handleapxtestFormChange(index, event)}
-                >
-                  <option value="default">Select Connector</option>
-                  <option value="Analog Unbalanced">Analog Unbalanced</option>
-                  <option value="Analog Balanced">Analog Balanced</option>
-                  <option value="Digital Unbalanced">Digital Unbalanced</option>
-                  <option value="Digital Balanced">Digital Balanced</option>
-                  <option value="Digital Optical">Digital Optical</option>
-                  <option value="HDMI Source">HDMI Source</option>
-                  <option value="HDMI ARC Tx">HDMI ARC Tx</option>
-                  <option value="Bluetooth">Bluetooth</option>
-                  <option value="Digital Seriel">Digital Seriel</option>
-                  <option value="PDM">PDM</option>
-                  <option value="Tranceducer">Tranceducer</option>
-                  <option value="ASIO">ASIO</option>
-                  <option value="None(External)">None(External)</option>
-                </select>
-              </div>
-              <div className="Column">
-                {/* <label for="priority">Priority</label> */}
-                Frequency<input
-                  type="text"
-                  className="frequency"
-                  name="frequency"
-                  onChange={event => handleapxtestFormChange(index, event)}
-                ></input>
-              </div>
-              </div>
-              <div className="Row">
-              <div className="Column">
-                {/* <label for="priority">Priority</label> */}
-                Input Channel<input
-                  type="number"
-                  className="inchannel"
-                  name="inputchannel"
-                  onChange={event => handleapxtestFormChange(index, event)}
-                ></input>
-              </div>
-              <div className="Column">
-                {/* <label for="priority">Priority</label> */}
-                Description<input
-                  type="text"
-                  className="desci"
-                  name="frequency"
-                  onChange={event => handleapxtestFormChange(index, event)}
-                ></input>
-              </div>
-              </div>
-            <div className="Row">
-              <div className="Column">
-                {/* <label for="priority">Priority</label> */}
-                Sample Rate<input
-                  type="text"
-                  className="samplerate"
-                  name="samplerate"
-                  onChange={event => handleapxtestFormChange(index, event)}
-                ></input>
-              </div>
-              <div className="Column">
-                {/* <label for="Alt_id">Alt ID</label> */}
-                Audio Format<select
-                  name="audioformate"
-                  className="audiofromate"
-                //   value={values.priority}
-                onChange={event => handleapxtestFormChange(index, event)}
-                >
-                    <option value="default">Select Format</option>
-                  <option value="Linear 2Ch Layout0">Linear 2Ch Layout0</option>
-                  <option value="Linear 8Ch Layout1">Linear 8Ch Layout1</option>
-
-                </select>
-              </div>
-              </div>
-              </div>
-              <div className="bottomdiv">
-              <div className="Row">
-              <div className="Column">
-                <label for="snr"><b>Signal to Noise Ratio</b></label>
-                Waveform<select
-                  name="snrwaveform"
-                  className="waveform"
-                //   value={values.priority}
-                onChange={event => handleapxtestFormChange(index, event)}
-                >
-                    <option value="default">Select Connector</option>
-                  <option value="f.wave">f.wave</option>
-                  <option value="Sine">Sine</option>
-                  <option value="Square">Square</option>
-                  <option value="Noice">Noice</option>
-                  <option value="Sine, Dual">Sine, Dual</option>
-                  <option value="Sine, Var Phase">Sine, Var Phase</option>
-                  <option value="Browse File">Browse File</option>
-
-                </select>
-              </div>
-              </div>
-
-              <div className="Row">
-              <div className="Column">
-                {/* <label for="priority">Priority</label> */}
-                Level<input
-                  type="text"
-                  className="level"
-                  name="snrlevel"
-                  onChange={event => handleapxtestFormChange(index, event)}
-                ></input>
-              </div>
-              </div>
-              <div className="Row">
-              <div className="Column">
-                {/* <label for="priority">Priority</label> */}
-                Frequency<input
-                  type="text"
-                  className="level"
-                  name="snrfrequency"
-                  onChange={event => handleapxtestFormChange(index, event)}
-                ></input>
-              </div>
-              </div>
-
-              <div className="Row">
-              <div className="Column">
-                <label for="lg"><b>Level and Gain</b></label>
-                Waveform<select
-                  name="lgwaveform"
-                  className="waveform"
-                //   value={values.priority}
-                onChange={event => handleapxtestFormChange(index, event)}
-                >
-                    <option value="default">Select Connector</option>
-                  <option value="f.wave">f.wave</option>
-                  <option value="Sine">Sine</option>
-                  <option value="Square">Square</option>
-                  <option value="Noice">Noice</option>
-                  <option value="Sine, Dual">Sine, Dual</option>
-                  <option value="Sine, Var Phase">Sine, Var Phase</option>
-                  <option value="Browse File">Browse File</option>
-
-                </select>
-              </div>
-              </div>
-
-              <div className="Row">
-              <div className="Column">
-                {/* <label for="priority">Priority</label> */}
-                Level<input
-                  type="text"
-                  className="level"
-                  name="lglevel"
-                  onChange={event => handleapxtestFormChange(index, event)}
-                ></input>
-              </div>
-              </div>
-              <div className="Row">
-              <div className="Column">
-                {/* <label for="priority">Priority</label> */}
-                Frequency<input
-                  type="text"
-                  className="level"
-                  name="lgfrequency"
-                  onChange={event => handleapxtestFormChange(index, event)}
-                ></input>
-              </div>
-              </div>
-              <div className="Row">
-              <div className="Column">
-                <label for="fr"><b>Frequency Response</b></label>
-                Start Frequency<input
-                  type="text"
-                  className="level"
-                  name="startfrequency"
-                  onChange={event => handleapxtestFormChange(index, event)}
-                ></input>
-              </div>
-              </div>
-              <div className="Row">
-              <div className="Column">
-                {/* <label for="priority">Priority</label> */}
-                Level<input
-                  type="text"
-                  className="level"
-                  name="frlevel"
-                  onChange={event => handleapxtestFormChange(index, event)}
-                ></input>
-              </div>
-              </div>
-              <div className="Row">
-              <div className="Column">
-                {/* <label for="priority">Priority</label> */}
-                Stop Frequency<input
-                  type="text"
-                  className="level"
-                  name="stopfrequency"
-                  onChange={event => handleapxtestFormChange(index, event)}
-                ></input>
-              </div>
-              </div>
-              </div>
-            <br></br>
-            <br></br>
-          </div>
-          <br></br>
-          
-          
-          <br></br>
-          <br></br>
-        </div>
-        </div>
-        )
-      })}
-      </form>
-    </div> : null}
 
           {/* <div className="horizontal-group"> */}
-          <div class="form-footer">
+          <div className="form-footer">
             <button type="reset" className="btn1" onClick={cancel}>
               Cancel
             </button>
@@ -1299,4 +1608,4 @@ const Val = () => {
     </div>
   );
 };
-export default Val;
+export default Repository;

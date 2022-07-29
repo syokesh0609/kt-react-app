@@ -187,7 +187,8 @@ a {
 
 .Apptable{
   margin: 20px;
-  min-height: 100vh;
+  min-height: 90.8vh;
+    overflow: auto;
 }
 
 input:disabled{

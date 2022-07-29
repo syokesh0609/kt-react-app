@@ -23,10 +23,12 @@ const Audioplayback = () => {
     setInputFields(data);
  }
 
- const addFields = () => {
-  let newfield = { audioplaydevice: '', bdplayermodel: '', bdplayerfilename: '', rasberryfilename: '', }
+ const cloneaudioplayback = () => {
+  for(let i=0; i<inputFields.length; i++){
+  let newfield = { audioplaydevice: inputFields[i].audioplaydevice, bdplayermodel: inputFields[i].bdplayermodel, bdplayerfilename: inputFields[i].bdplayerfilename, rasberryfilename: inputFields[i].rasberryfilename, }
 
   setInputFields([...inputFields, newfield])
+  }
 }
 
 const submit = (e) => {
@@ -49,6 +51,7 @@ const removeFields = (index) => {
         <div className="audioform-header">
           <i>Audio Playback</i>
           <div className="delicon" onClick={() => removeFields(index)}> <DeleteIcon /></div>
+          <div className="copyicon" onClick={cloneaudioplayback}> <FileCopyIcon /></div>
          
         </div>
         <div className="insidediv">

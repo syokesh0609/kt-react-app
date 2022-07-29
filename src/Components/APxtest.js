@@ -17,7 +17,7 @@ const Videoverification = () => {
     setInputapxtestFields(data);
  }
 
- const addFields = () => {
+ const cloneapxtest = () => {
   let newapxtestfield = {}
 
   setInputapxtestFields([...inputapxtestFields, newapxtestfield])
@@ -43,6 +43,7 @@ const removeapxtestFields = (index) => {
         <div className="audioform-header">
           <i>APx Test</i>
           <div className="delicon" onClick={() => removeapxtestFields(index)}> <DeleteIcon /></div>
+          <div className="copyicon" onClick={cloneapxtest}> <FileCopyIcon /></div>
          {/* <div className="copyicon" > <FileCopyIcon /></div> */}
         </div>
         <div className="insidediv">
@@ -203,7 +204,7 @@ const removeapxtestFields = (index) => {
               <div className="bottomdiv">
               <div className="Row">
               <div className="Column">
-                <label for="snr"><b>Signal to Noise Ratio</b></label>
+                <label><b>Signal to Noise Ratio</b></label>
                 Waveform<select
                   name="snrwaveform"
                   className="waveform"
@@ -248,7 +249,7 @@ const removeapxtestFields = (index) => {
 
               <div className="Row">
               <div className="Column">
-                <label for="lg"><b>Level and Gain</b></label>
+                <label><b>Level and Gain</b></label>
                 Waveform<select
                   name="lgwaveform"
                   className="waveform"
@@ -292,7 +293,7 @@ const removeapxtestFields = (index) => {
               </div>
               <div className="Row">
               <div className="Column">
-                <label for="fr"><b>Frequency Response</b></label>
+                <label><b>Frequency Response</b></label>
                 Start Frequency<input
                   type="text"
                   className="level"
@@ -337,7 +338,7 @@ const removeapxtestFields = (index) => {
         )
       })}
       </form>
-      <button onClick={addFields}>Add More..</button>
+      {/* <button onClick={addFields}>Add More..</button> */}
       <button onClick={submit}>Submit</button>
     </div>
 

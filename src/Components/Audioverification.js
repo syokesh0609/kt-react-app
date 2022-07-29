@@ -18,7 +18,7 @@ const Audioverification = () => {
     setInputaudioverifyFields(data);
  }
 
- const addFields = () => {
+ const cloneaudioverification = () => {
   let newaudioverifyfield = { audioverifydevice: '', lowerlimit: '', upperlimit: '',}
 
   setInputaudioverifyFields([...inputaudioverifyFields, newaudioverifyfield])
@@ -45,6 +45,7 @@ const removeaudioverifyFields = (index) => {
         <div className="audioform-header">
           <i>Audio Verification</i>
           <div className="delicon" onClick={() => removeaudioverifyFields(index)}> <DeleteIcon /></div>
+          <div className="copyicon" onClick={cloneaudioverification}> <FileCopyIcon /></div>
          
         </div>
         <div className="insidediv">
@@ -81,7 +82,7 @@ const removeaudioverifyFields = (index) => {
         )
       })}
       </form>
-      <button onClick={addFields}>Add More..</button>
+      {/* <button onClick={addFields}>Add More..</button> */}
       <button onClick={submit}>Submit</button>
     </div>
   );

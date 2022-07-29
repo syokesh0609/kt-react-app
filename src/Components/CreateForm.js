@@ -140,7 +140,7 @@ export default class CreateForm extends React.Component {
             </h1>
           </div>
           <div>
-            <label for="requuirement_name">
+            <label>
               <b>Requirement Name</b>
             </label>
             <input
@@ -154,14 +154,14 @@ export default class CreateForm extends React.Component {
               <span className="error">{errors.fullName}</span>
             )}
 
-            <label for="requuirement_details">
+            <label>
               <b>Requirement Details:</b>
             </label>
 
             <div className="container">
               <div className="horizontal-group">
                 <div className="form-group left">
-                  <label for="requuirement_id">Requirement ID</label>
+                  <label>Requirement ID</label>
                   <input
                     type="text"
                     name="requireid"
@@ -171,7 +171,7 @@ export default class CreateForm extends React.Component {
                   ></input>
                 </div>
                 <div className="form-group right">
-                  <label for="priority">Priority</label>
+                  <label>Priority</label>
                   <select name="priority" onChange={this.handleChange}>
                     <option value="High">High</option>
                     <option value="Medium">Medium</option>
@@ -182,7 +182,7 @@ export default class CreateForm extends React.Component {
 
               <div className="horizontal-group">
                 <div className="form-group left">
-                  <label for="Alt_id">Alt ID</label>
+                  <label>Alt ID</label>
                   <input
                     type="text"
                     name="altid"
@@ -195,7 +195,7 @@ export default class CreateForm extends React.Component {
                   )}
                 </div>
                 <div className="form-group right">
-                  <label for="Created">Created By</label>
+                  <label >Created By</label>
                   <input
                     type="text"
                     value="admin"
@@ -210,7 +210,7 @@ export default class CreateForm extends React.Component {
               <br></br>
             </div>
             <br></br>
-            <label for="description">
+            <label>
               <b>Description</b>
             </label>
             <br></br>

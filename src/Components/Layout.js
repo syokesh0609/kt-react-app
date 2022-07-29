@@ -34,9 +34,9 @@ const Layout = () => {
             Repository
           </Link>
 
-          <Link to="/testaction" className="table">
+          {/* <Link to="/testaction" className="table">
             Test
-          </Link>
+          </Link> */}
 
           <Link to="/contact" className="contact">
             Contact

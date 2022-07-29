@@ -18,7 +18,7 @@ const Videoplayback = () => {
     setInputvideoplayFields(data);
  }
 
- const addFields = () => {
+ const clonevideoplayback = () => {
   let newvideoplayfield = { videoplaydevice: '', vprasperrymodel: '', vprasperryfilename: '',}
 
   setInputvideoplayFields([...inputvideoplayFields, newvideoplayfield])
@@ -44,6 +44,7 @@ const removevideoplayFields = (index) => {
         <div className="audioform-header">
           <i>Video Playback</i>
           <div className="delicon" onClick={() => removevideoplayFields(index)}> <DeleteIcon /></div>
+          <div className="copyicon" onClick={clonevideoplayback}> <FileCopyIcon /></div>
          
         </div>
         <div className="insidediv">
