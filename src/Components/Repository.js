@@ -1,7 +1,8 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "./Form.css";
+import styles from "./styles";
 import Audioplayback from "./Audioplayback";
 import Audioverification from "./Audioverification";
 import Videoplayback from "./Videoplayback";
@@ -10,24 +11,59 @@ import APxtest from "./APxtest";
 import OpenWithIcon from "@mui/icons-material/OpenWith";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { FaRoute } from "react-icons/fa";
+import Modal from "react-modal";
+import MUIDataTable from "mui-datatables";
+import { Treebeard, decorators } from "react-treebeard";
+import Treeviewtable from "./Treeviewtable";
+import Viewmappingtable from "./Viewmapping";
+
+// Mapping===========================================================================
+
+const data1 = {
+  name: "Test Case",
+  toggled: true,
+  active: true,
+  children: [
+    {
+      name: "Automation",
+      children: { name: "AV_Version 1.0" },
+    },
+  ],
+};
+
+const Header = ({ onSelect, style, customStyles, node }) => {
+  const iconType = node.children ? "folder" : "file-text";
+  const iconClass = `fa fa-${iconType}`;
+  const iconStyle = { marginRight: "5px" };
+
+  return (
+    <span style={style.base} onClick={onSelect}>
+      {/* <Div style={node.selected ? {...style.title, ...customStyles.header.title} : style.title}> */}
+      <i className={iconClass} style={iconStyle} />
+      {node.name}
+      {/* </Div> */}
+    </span>
+  );
+};
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "white",
+    width: 1700,
+    height: 900,
+  },
+};
+
 // import { useLocation } from "react-router-dom";
 
 const Repository = () => {
   const location = useLocation();
-  const location1 = useLocation();
-
-  // const location = useLocation();
-  //   let docId = location.state.id;
-  //   let Createrequirement_name = location.state.Rows[0];
-  //   let Createrequirement_id = location.state.Rows[1];
-  //   let Createpriority = location.state.Rows[2];
-  //   let Createaltid = location.state.Rows[3];
-  //   let Createdescription = location.state.Rows[5];
-
-  //   console.log(location)
-  // const [values, setState] = useState({ fullName: null,
-  //     email: null,
-  //     password: null,});
   const [values, setState] = useState({
     fullName: "",
     altid: "",
@@ -50,24 +86,6 @@ const Repository = () => {
   });
   const [fst, setFname] = useState("");
 
-  const [Type, setAplayback] = useState("");
-
-  const [{ Audioplaybackcomp }, setItems] = useState({ Audioplaybackcomp: [] });
-
-  const [{ Audioverificationcomp }, setItemsav] = useState({
-    Audioverificationcomp: [],
-  });
-
-  const [{ Videoplaybackcomp }, setItemsvp] = useState({
-    Videoplaybackcomp: [],
-  });
-
-  const [{ Videoverificationcomp }, setItemsvv] = useState({
-    Videoverificationcomp: [],
-  });
-
-  const [{ Apxtestcomp }, setItemsapx] = useState({ Apxtestcomp: [] });
-
   const [ap, setaudioplay] = useState("");
 
   const [av, setaudioverify] = useState("");
@@ -78,21 +96,6 @@ const Repository = () => {
 
   const [apx, setapxtest] = useState("");
 
-  const [locatedata, setlocaldata] = useState("");
-
-  const [locatedata1, setlocaldata1] = useState("");
-
-  const [locatedata2, setlocaldata2] = useState("");
-
-  const [locatedata3, setlocaldata3] = useState("");
-
-  const [finalaudioplaydata, setfinalaudioplay] = useState("");
-
-  const [finalaudioverifydata, setfinalaudioverify] = useState("");
-
-  const [finalvideoplaydata, setfinalvideoplay] = useState("");
-
-  const [finalvideoverifydata, setfinalvideoverify] = useState("");
   // Audio Playback=======================================================
   const [inputFields, setInputFields] = useState([
     {
@@ -183,59 +186,8 @@ const Repository = () => {
     }
 
     setState({ ...values, errors, [name]: value });
-    // if(location.state.audioplaydevice === "BD Player"){
-    //   setlocaldata(location.state);
-    //   // console.log(locatedata)
-    //   let audioplaydata = {
-    //     action_type: "Audio Playback",
-    //     testaction_args: locatedata,
-    //   }
-    //   setfinalaudioplay(audioplaydata)
-    //   // console.log(finalaudioplaydata)
-    // }
-    // if(location.state.audioplaydevice === ""){
-    //   setfinalaudioplay("")
-    // }
-    // if(location.state.audioverifydevice === "Microphone(AC)" || location.state.audioverifydevice === "Audyssey"){
-    //   setlocaldata1(location.state);
-    //   // console.log(locatedata)
-    //   let audioverifydata = {
-    //     action_type: "Audio Verification",
-    //     testaction_args: locatedata1,
-    //   }
-    //   setfinalaudioverify(audioverifydata)
-    //   // console.log(finalaudioplaydata)
-    // }
-    // if(location.state.audioverifydevice === "" || location.state.audioverifydevice === ""){
-    //   setfinalaudioverify("")
-    // }
-    // if(location.state.videoplaydevice === "Rasperry Pi"){
-    //   setlocaldata2(location.state);
-    //   // console.log(locatedata)
-    //   let videoplaydata = {
-    //     action_type: "Video Playback",
-    //     testaction_args: locatedata2,
-    //   }
-    //   setfinalvideoplay(videoplaydata)
-    //   // console.log(finalaudioplaydata)
-    // }
-    // if(location.state.videoverifydevice === "WebCam(PC)"){
-    //   setlocaldata3(location.state);
-    //   // console.log(locatedata)
-    //   let videoverifydata = {
-    //     action_type: "Video Verification",
-    //     testaction_args: locatedata3,
-    //   }
-    //   setfinalvideoverify(videoverifydata)
-    //   // console.log(finalaudioplaydata)
-    // }
   };
 
-  const handleFormChange = (index, event) => {
-    let data = [...inputFields];
-    data[index][event.target.name] = event.target.value;
-    setInputFields(data);
-  };
   const validateForm = (errors) => {
     let valid = true;
     Object.values(errors).forEach((val) => val.length > 0 && (valid = false));
@@ -360,12 +312,6 @@ const Repository = () => {
     // window.location.href = "/requirements";
   }
 
-  const removeFields = (index) => {
-    let data = [...inputFields];
-    data.splice(index, 1);
-    setInputFields(data);
-  };
-
   function actionsubmit() {
     if (values.testactions === "Audio Playback") {
       console.log("action");
@@ -438,6 +384,18 @@ const Repository = () => {
   const { errors } = values;
 
   // Audio Playback==========================================================================
+
+  const handleFormChange = (index, event) => {
+    let data = [...inputFields];
+    data[index][event.target.name] = event.target.value;
+    setInputFields(data);
+  };
+
+  const removeFields = (index) => {
+    let data = [...inputFields];
+    data.splice(index, 1);
+    setInputFields(data);
+  };
 
   const cloneaudioplayback = () => {
     for (let i = 0; i < inputFields.length; i++) {
@@ -541,6 +499,197 @@ const Repository = () => {
 
     setInputapxtestFields([...inputapxtestFields, newapxtestfield]);
   };
+
+  // Mapping=================================================
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpenview, setModalOpenview] = useState(false);
+  const [datatree, setData] = useState(data1);
+  const [cursor, setCursor] = useState(false);
+  const [dis, setDisable] = useState(true);
+  const [model, setModel] = React.useState("");
+  const [Mapcount, setMappingno] = useState("");
+  const [requirement_id, setRequireid] = useState("");
+  const [priority, setPriority] = useState("");
+  const [alt_id, setAltid] = useState("");
+  const [docId, setDocid] = useState("");
+  const [description, setDescription] = useState("");
+  const [Obj, setObj] = useState("");
+  const [selectrow, setSelectrow] = useState("");
+
+  const onToggle = (node, toggled) => {
+    setDisable(true);
+    console.log("df", node);
+
+    setObj(node.name);
+
+    if (cursor) {
+      cursor.active = false;
+    }
+    node.active = true;
+    if (node.children) {
+      node.toggled = toggled;
+    }
+    setCursor(node);
+    setData(Object.assign({}, datatree));
+
+    if (node.model) {
+      setModel(node.model);
+    } else {
+      setModel("");
+    }
+  };
+
+  //   Table====================================================================
+
+  const columns = [
+    "requirement_name",
+    "requirement_id",
+    "priority",
+    "alt_id",
+    "created_by",
+    "description",
+  ];
+  // const navigate = useNavigate();
+
+  const [tabledata, setData1] = useState([]);
+  // const [docId, setDocId] = useState("")
+  const getData = () => {
+    fetch("http://172.20.8.192:8000/requirementreadData?doc=all", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then(function (response) {
+        console.log(response);
+        return response.json();
+      })
+      .then(function (myJson) {
+        console.log(myJson);
+        setData1(myJson);
+      });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
+  console.log(data1);
+  const data = tabledata;
+
+  const options = {
+    filterType: "checkbox",
+    onRowsSelect: (rowsData, dataRows) => {
+      console.log(dataRows);
+      setSelectrow(dataRows);
+    },
+    onRowClick: (rowData, rowState) => {
+      console.log(rowData);
+    },
+    onRowsDelete: (rowsDeleted, dataRows) => {
+      console.log(rowsDeleted);
+
+      for (let i = 0; i < rowsDeleted.data.length; i++) {
+        let indexValue = rowsDeleted.data[i].index;
+
+        console.log(indexValue);
+        fetch("http://172.20.8.192:8000/requirementreadData?doc=all", {
+          method: "GET",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            let docId = data[indexValue]._id;
+            console.log(docId);
+
+            fetch(
+              `http://172.20.8.192:8000/requirementdeleteData?docId=${docId}`,
+              {
+                method: "Delete",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            )
+              .then((response) => response.json())
+              .then((data) => {
+                console.log(data);
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
+    //  console.log(dataRows)
+  };
+
+  // View Mapping===============================================================
+
+  fetch("http://172.20.8.192:8000/maprequirementreadData?doc=all", {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data.length);
+      setMappingno(data.length);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+  function savechange() {
+    console.log(selectrow.length);
+    if (selectrow.length !== 0) {
+      //    for (let i = 0; i < selectrow[0].length; i++) {
+      let indexValue = selectrow[0].index;
+
+      console.log(indexValue);
+      fetch("http://172.20.8.192:8000/requirementreadData?doc=all", {
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          let Selectrowdata = data[indexValue];
+          console.log(Selectrowdata);
+
+          let queryString = JSON.stringify(Selectrowdata);
+          fetch("http://172.20.8.192:8000/maprequirementcreateData", {
+            method: "POST",
+            body: queryString,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Created Data ", data);
+              fetch("http://172.20.8.192:8000/maprequirementreadData?doc=all", {
+                method: "GET",
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  console.log(data.length);
+                  setMappingno(data.length);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      //   }
+      setModalOpen(false);
+    }
+  }
 
   return (
     <div className="App">
@@ -668,11 +817,95 @@ const Repository = () => {
           )}
           <br></br>
           <br></br>
+
+          <div className="maprequire">
+            <b>Map to Requirement: </b>
+            <label className="map" onClick={setModalOpen}>
+              {Mapcount} requirements(s) mapped
+              <FaRoute
+                style={{
+                  color: "rgb(46, 184, 46)",
+                  fontSize: "20px",
+                  width: "32px",
+                }}
+              />
+            </label>
+            <button
+              className="mapcaseview"
+              type="button"
+              onClick={setModalOpenview}
+            >
+              View
+            </button>
+          </div>
+
+          {/* MOdal=========================================================== */}
+
+          <Modal
+            isOpen={modalOpen}
+            onRequestClose={() => setModalOpen(false)}
+            style={customStyles}
+          >
+            <button className="modal1" onClick={() => setModalOpen(false)}>
+              X
+            </button>
+            <h2 className="maphead">Map Requirements for...</h2>
+
+            <div className="App1">
+              <div className="tab">
+                <Treebeard
+                  data={datatree}
+                  onToggle={onToggle}
+                  style={styles}
+                  decorators={{ ...decorators, ...Header }}
+                />
+              </div>
+
+              <div className="tabcontent">
+                <MUIDataTable
+                  title={"Manage Versions"}
+                  data={data}
+                  columns={columns}
+                  // icons={tableIcons}
+                  options={options}
+                />
+                <div className="horizontal-group">
+                  <div className="form-group right">
+                    <button
+                      type="reset"
+                      className="btn1"
+                      onClick={() => setModalOpen(false)}
+                    >
+                      Cancel
+                    </button>
+                    <button className="btn" id="Save" onClick={savechange}>
+                      Save Changes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Modal>
+
+          {/* view modal========================================================================= */}
+
+          <Modal
+            isOpen={modalOpenview}
+            onRequestClose={() => setModalOpenview(false)}
+            style={customStyles}
+          >
+            <button className="modal1" onClick={() => setModalOpenview(false)}>
+              X
+            </button>
+            <h2 className="maphead">Mapped Requirements for...</h2>
+            <Viewmappingtable />
+          </Modal>
+
           {/* Automated Test======================================================================================================== */}
           {values.testtype === "Automated" ? (
             <div>
               {values.testtype === "Automated" ? (
-                <div>
+                <div className="testactiondiv">
                   <div>
                     <label>
                       <b>Test Actions:</b>

@@ -26,12 +26,12 @@ const Layout = () => {
             Requirements
           </Link>
 
-          <Link to="/treeview" className="table">
-            TreeView
-          </Link>
-
           <Link to="/repository" className="table">
             Repository
+          </Link>
+
+          <Link to="/treeview" className="table">
+            TreeView
           </Link>
 
           {/* <Link to="/testaction" className="table">

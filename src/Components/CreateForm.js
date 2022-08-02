@@ -14,7 +14,7 @@ function cancel() {
 }
 
 const sub_array = [];
-fetch("http://172.20.8.192:8000/getData?doc=all", {
+fetch("http://172.20.8.192:8000/requirementreadData?doc=all", {
   method: "GET",
 })
   .then((response) => response.json())
@@ -105,7 +105,7 @@ export default class CreateForm extends React.Component {
       // setUdata(a);
       // console.log(Userdata);
       let queryString = JSON.stringify(a);
-      fetch("http://172.20.8.192:8000/createData", {
+      fetch("http://172.20.8.192:8000/requirementcreateData", {
         method: "POST",
         body: queryString,
         headers: {
@@ -195,7 +195,7 @@ export default class CreateForm extends React.Component {
                   )}
                 </div>
                 <div className="form-group right">
-                  <label >Created By</label>
+                  <label>Created By</label>
                   <input
                     type="text"
                     value="admin"

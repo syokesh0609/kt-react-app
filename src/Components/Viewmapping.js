@@ -19,7 +19,7 @@ function Crud() {
   const [data1, setData] = useState([]);
   // const [docId, setDocId] = useState("")
   const getData = () => {
-    fetch("http://172.20.8.192:8000/requirementreadData?doc=all", {
+    fetch("http://172.20.8.192:8000/maprequirementreadData?doc=all", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -45,28 +45,7 @@ function Crud() {
   const options = {
     filterType: "checkbox",
     // selectableRowsOnClick: true,
-    onRowSelectionChange: (currentRowsSelected, dataRows) => {
-      console.log(dataRows);
-    },
-    onRowClick: (rowData, rowState) => {
-      console.log(rowData);
-      fetch("http://172.20.8.192:8000/requirementreadData?doc=all", {
-        method: "GET",
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          let a = data.find(
-            ({ requirement_name }) => requirement_name === rowData[0]
-          );
-          let docId = a._id;
 
-          //  console.log(docId)
-          navigate("/UpdateForm", { state: { Rows: rowData, id: docId } });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
     onRowsDelete: (rowsDeleted, dataRows) => {
       console.log(rowsDeleted);
 
@@ -74,7 +53,7 @@ function Crud() {
         let indexValue = rowsDeleted.data[i].index;
 
         console.log(indexValue);
-        fetch("http://172.20.8.192:8000/requirementreadData?doc=all", {
+        fetch("http://172.20.8.192:8000/maprequirementreadData?doc=all", {
           method: "GET",
         })
           .then((response) => response.json())
@@ -82,12 +61,15 @@ function Crud() {
             let docId = data[indexValue]._id;
             console.log(docId);
 
-            fetch(`http://172.20.8.192:8000/deleteData?docId=${docId}`, {
-              method: "Delete",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            })
+            fetch(
+              `http://172.20.8.192:8000/maprequirementdeleteData?docId=${docId}`,
+              {
+                method: "Delete",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            )
               .then((response) => response.json())
               .then((data) => {
                 console.log(data);
@@ -103,15 +85,9 @@ function Crud() {
     },
     //  console.log(dataRows)
   };
-  function add() {
-    navigate("/Form");
-  }
 
   return (
     <div className="Apptable">
-      <button className="new" onClick={add}>
-        +
-      </button>
       <MUIDataTable
         title={"Manage Versions"}
         data={data}

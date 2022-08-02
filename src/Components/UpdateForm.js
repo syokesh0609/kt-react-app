@@ -112,7 +112,7 @@ const Val = () => {
       //   console.log(value)
 
       let queryString = JSON.stringify(query);
-      fetch("http://172.20.8.192:8000/updateData", {
+      fetch("http://172.20.8.192:8000/requirementupdateData", {
         method: "PATCH",
         body: queryString,
         headers: {
@@ -122,7 +122,7 @@ const Val = () => {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          window.location.href = "/requirements"
+          window.location.href = "/requirements";
         })
         .catch((err) => {
           console.error(err);

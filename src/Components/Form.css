@@ -83,7 +83,7 @@ a {
   background-color: white;
   /* border: 2px solid black; */
   margin: 20px;
-  height: 700px;
+  height: 750px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   /* line-height: 50px; */
   /* min-height: 100vh; */
@@ -171,38 +171,38 @@ a {
   float: right;
   height: 64px;
   border: none;
-  background-color: #61bf7d!important;
+  background-color: #61bf7d !important;
   cursor: pointer;
 }
 
-.new:hover{
+.new:hover {
   color: blue;
 }
 
 .error {
-  color:#db2269;
+  color: #db2269;
   font-size: 0.8em;
   display: relative;
 }
 
-.Apptable{
+.Apptable {
   margin: 20px;
   min-height: 90.8vh;
-    overflow: auto;
+  overflow: auto;
 }
 
-input:disabled{
-  color: #8a8888; 
-  border: 1 px solid #8a8888;    
+input:disabled {
+  color: #8a8888;
+  border: 1 px solid #8a8888;
 }
 
-.link{
+.link {
   cursor: pointer;
   font-size: 15px;
   font-weight: 600;
 }
 
-.link:hover{
+.link:hover {
   text-decoration: underline;
   color: blue;
 }
@@ -213,7 +213,6 @@ input:disabled{
   table-layout: fixed; /*Optional*/
   border-spacing: 10px; /*Optional*/
   text-align: right;
-  
 }
 .Column {
   display: table-cell;
@@ -222,7 +221,7 @@ input:disabled{
   /* text-align: left; */
 }
 
-.actiondrop{
+.actiondrop {
   width: 300px;
 }
 
@@ -239,19 +238,20 @@ input:disabled{
   margin-left: 10px;
 }
 
-.delay,  .unit{
+.delay,
+.unit {
   width: 60px;
   height: 50px;
   font-size: large;
   /* float: right; */
 }
 
-.unit{
+.unit {
   width: 100px;
   /* float: right; */
   margin-left: 10px;
 }
-.delay1{
+.delay1 {
   /* float: right; */
 }
 .form-footer {
@@ -267,7 +267,7 @@ input:disabled{
 
 .Audioplayback {
   /* overflow: auto; */
- 
+
   background-color: white;
   /* border: 2px solid black; */
   margin: 20px;
@@ -275,16 +275,15 @@ input:disabled{
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   font-size: 25px;
   border-radius: 10px;
-  
 }
-.audioform-header{
-background-color: whitesmoke;
+.audioform-header {
+  background-color: whitesmoke;
   color: #808080;
   border-top: 10px;
   height: 40px;
   /* padding: 3px; */
 }
-.insidediv{
+.insidediv {
   padding-left: 16px;
   padding-right: 16px;
   padding-bottom: 16px;
@@ -292,85 +291,148 @@ background-color: whitesmoke;
   margin-top: 20px;
 }
 
-.device{
+.device {
   width: 300px;
   /* float: left; */
 }
 
-.Model{
+.Model {
   width: 200px;
   /* float: left; */
 }
 
-.Model1{
+.Model1 {
   width: 280px;
   /* float: left; */
 }
-.filename{
+.filename {
   width: 150px;
   /* float: right; */
 }
-.delicon{
+.delicon {
   float: right;
   margin: 10px;
   color: red;
   cursor: pointer;
 }
-.copyicon{
+.copyicon {
   float: right;
   margin: 10px;
   color: #02a871;
   cursor: pointer;
 }
-.Modeldiv{
+.Modeldiv {
   /* float: right; */
   margin-left: 58px;
 }
-.Modeldiv1{
+.Modeldiv1 {
   /* float: right; */
   margin-left: auto;
 }
-.buttondiv{
+.buttondiv {
   float: right;
 }
 
-.filediv{
+.filediv {
   /* float: right; */
   margin-left: 37px;
 }
 
-.filediv1{
+.filediv1 {
   /* float: right; */
   margin-left: 55px;
 }
-.Lower, .Upper{
+.Lower,
+.Upper {
   width: 50px;
 }
 
-.upperdiv, .lowerdiv{
- margin-left: 12px;
+.upperdiv,
+.lowerdiv {
+  margin-left: 12px;
 }
-.filenameinp{
+.filenameinp {
   width: 30%;
 }
- /* .selectdev{
+/* .selectdev{
   float: left;
 } */
 /* .selecttype{
   float: right;
 }  */
 
-.outconnector, .waveform, .outchannel, .level, .inconnector, .frequency, .inchannel, .desci, .samplerate, .audiofromate{
+.outconnector,
+.waveform,
+.outchannel,
+.level,
+.inconnector,
+.frequency,
+.inchannel,
+.desci,
+.samplerate,
+.audiofromate {
   width: 300px;
 }
 
-.boxapx{
+.boxapx {
   border: 1px solid lightgray;
   border-radius: 10px;
 }
 
-.bottomdiv{
+.bottomdiv {
   /* border: 2px solid black; */
   width: 50%;
 }
 
+.map {
+  border: 1px solid transparent;
+  border-radius: 30px;
+  background-color: #fff;
+  box-shadow: 1px 6px 10px 1px #d4d4d4;
+  font-weight: 500;
+  margin: 0 15px;
+  cursor: pointer;
+  width: 250px;
+  padding: 7px 14px;
+}
+.maprout {
+  color: rgb(46, 184, 46);
+}
+.mapcaseview {
+  background-color: #fff;
+  border: 1px solid #007bff;
+  color: #007bff;
+  cursor: pointer;
+  margin-left: 8px;
+  padding: 0.25rem 0.5rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+.mapcaseview:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.maprequire {
+  display: inline;
+}
+
+.testactiondiv {
+  margin-top: 20px;
+}
+.modal1 {
+  float: right;
+  border: none;
+  background-color: white;
+  color: black;
+  font-weight: 900;
+  cursor: pointer;
+  font-size: larger;
+}
+
+.modal1:hover {
+  color: red;
+}
+.maphead {
+  border-bottom: 1px solid gray;
+}
