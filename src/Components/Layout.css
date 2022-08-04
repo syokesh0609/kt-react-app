@@ -68,3 +68,50 @@
 .contact:focus{
   background-color: #177c36;
 }
+
+.profileview{
+  line-height: 40px;
+  margin-top: 30px;
+  color: gray;
+  font-size: medium;
+  cursor: pointer;
+}
+
+.administrator{
+  color: gray;
+  /* border-bottom: 1px solid gray; */
+}
+
+.admini{
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  font-size: medium;
+  width: 100%;
+  height: 40px;
+  text-align: left;
+  color: gray;
+}
+.admini:disabled{
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.admini:hover, .changepass:hover, .logout:hover{
+  background-color: #66f090;
+  color: white;
+
+}
+
+.tss-gm6zfk-MUIDataTableHeadCell-fixedHeader {
+  /* position: -webkit-sticky; */
+  position: sticky;
+  top: 0px;
+  z-index: 100;
+  /* background-color: #fff; */
+}
+
+element.style {
+  position: fixed;
+  inset: 0px;
+  /* background-color: rgba(255, 255, 255, 0.75); */
+}

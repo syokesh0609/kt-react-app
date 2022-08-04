@@ -87,6 +87,7 @@ a {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   /* line-height: 50px; */
   /* min-height: 100vh; */
+  /* line-height: 50px; */
 }
 .description {
   height: 100px;
@@ -354,12 +355,6 @@ input:disabled {
 .filenameinp {
   width: 30%;
 }
-/* .selectdev{
-  float: left;
-} */
-/* .selecttype{
-  float: right;
-}  */
 
 .outconnector,
 .waveform,
@@ -435,4 +430,40 @@ input:disabled {
 }
 .maphead {
   border-bottom: 1px solid gray;
+}
+
+.btn_map{
+  padding: 10px;
+  background-color: white;
+  font-size: 17px;
+  border: 1px solid black;
+  color: white;
+  cursor: pointer;
+  background-color: #21b613 !important;
+  border-radius: 5px;
+  float: right;
+}
+
+.btn_map:disabled{
+  color: #fff;
+  opacity: .50;
+  cursor: not-allowed;
+}
+
+.tss-gm6zfk-MUIDataTableHeadCell-fixedHeader {
+  /* position: -webkit-sticky; */
+  position: sticky;
+  top: 0px;
+  z-index: 100;
+  /* background-color: #fff; */
+}
+
+element.style {
+  position: fixed;
+  inset: 0px;
+  /* background-color: rgba(255, 255, 255, 0.75); */
+}
+
+.App2{
+  line-height: 30px;
 }

@@ -74,3 +74,17 @@ body {font-family: "Lato", sans-serif;}
   font-size: 30px;
   margin-bottom: 10px;
 }
+
+.usersetup{
+  cursor: pointer;
+  font-size: large;
+  padding: 10px;
+}
+
+.usersetup:hover{
+  background-color: rgba(41, 137, 236, 0.88);;
+}
+
+.usersetup:focus{
+  background-color: rgba(41, 137, 236, 0.88);;
+}

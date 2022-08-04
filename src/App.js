@@ -16,18 +16,21 @@ import CreateForm from "./Components/CreateForm";
 import Treeview from "./Components/Treeview";
 import Repository from "./Components/Repository";
 import "./App.css";
+import Login from "./Components/Login"
+import Administrator from "./Components/Administrator"
 
-import Testaction from "./Components/workout";
+// import Testaction from "./Components/workout";
 
 function App() {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
   return (
     <div className="App">
-      <SwitchButton />
+      {/* <SwitchButton /> */}
 
       <div className={`bg ${darkMode ? "bg-dark" : "bg-light"}`}>
         <Routes>
+          <Route path="login" element={<Login />} />
           <Route path="/" element={<Layout />}>
             <Route path="home" element={<Home />} />
             <Route path="user" element={<User />} />
@@ -41,7 +44,8 @@ function App() {
             <Route path="treeview" element={<Treeview />} />
             <Route path="repository" element={<Repository />} />
             <Route path="repository/audioplayback" element={<Repository />} />
-            <Route path="testaction" element={<Testaction />} />
+            {/* <Route path="testaction" element={<Testaction />} /> */}
+            <Route path="administrator" element={<Administrator />} />
           </Route>
         </Routes>
       </div>
