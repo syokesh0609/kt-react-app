@@ -14,6 +14,7 @@
 input,
 select {
   width: 100%;
+  /* height: 100%; */
   padding: 8px;
   margin: 5px 0 2px 0;
   display: inline-block;
@@ -466,4 +467,8 @@ element.style {
 
 .App2{
   line-height: 30px;
+}
+
+.tss-gm6zfk-MUIDataTableHeadCell-fixedHeader{
+  background-color: none;
 }

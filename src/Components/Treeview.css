@@ -88,3 +88,10 @@ body {font-family: "Lato", sans-serif;}
 .usersetup:focus{
   background-color: rgba(41, 137, 236, 0.88);;
 }
+.tss-gm6zfk-MUIDataTableHeadCell-fixedHeader{
+  background-color: none;
+}
+
+.MuiTableHeader-root{
+  background-color: none;
+}

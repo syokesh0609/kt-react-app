@@ -9,6 +9,9 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const customStyles = {
+  overlay:{
+    backgroundColor:"none",
+},
   content: {
     top: "5%",
     left: "auto",
@@ -123,9 +126,9 @@ const Layout = () => {
             TreeView
           </Link>
 
-          {/* <Link to="/testaction" className="table">
+          <Link to="/testaction" className="table">
             Test
-          </Link> */}
+          </Link>
 
           <AccountCircle
             onClick={profile}

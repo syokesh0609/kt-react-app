@@ -115,3 +115,6 @@ element.style {
   inset: 0px;
   /* background-color: rgba(255, 255, 255, 0.75); */
 }
+.tss-gm6zfk-MUIDataTableHeadCell-fixedHeader{
+  background-color: none;
+}

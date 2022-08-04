@@ -257,3 +257,6 @@ input:checked + .slider {
   color: black;
   font-weight: bolder;
 }
+.tss-gm6zfk-MUIDataTableHeadCell-fixedHeader{
+  background-color: none;
+}

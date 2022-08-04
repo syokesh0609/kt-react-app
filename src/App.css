@@ -165,3 +165,7 @@ input {
   color: white;
   border: 2px solid white;
 }
+
+.tss-gm6zfk-MUIDataTableHeadCell-fixedHeader{
+  background-color: none;
+}

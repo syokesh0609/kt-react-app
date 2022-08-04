@@ -3,11 +3,6 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "./Form.css";
 import styles from "./styles";
-import Audioplayback from "./Audioplayback";
-import Audioverification from "./Audioverification";
-import Videoplayback from "./Videoplayback";
-import Videoverification from "./Videoverification";
-import APxtest from "./APxtest";
 import OpenWithIcon from "@mui/icons-material/OpenWith";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -55,8 +50,8 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     backgroundColor: "white",
-    width: 1700,
-    height: 900,
+    width: "95%",
+    height: "95%",
   },
 };
 
@@ -506,10 +501,10 @@ const Repository = () => {
   const [modalOpenview, setModalOpenview] = useState(false);
   const [datatree, setData] = useState(data1);
   const [cursor, setCursor] = useState(false);
-  const [dis, setDisable] = useState(true);
+  const [dis, setDisable] = useState(false);
   const [model, setModel] = React.useState("");
   const [Mapcount, setMappingno] = useState("");
-  const [requirement_id, setRequireid] = useState("");
+  const [disable_button, setdisabled] = useState(false);
   const [priority, setPriority] = useState("");
   const [alt_id, setAltid] = useState("");
   const [docId, setDocid] = useState("");
@@ -614,6 +609,7 @@ const Repository = () => {
               .then((response) => response.json())
               .then((data) => {
                 console.log(data);
+                
               })
               .catch((err) => {
                 console.error(err);
@@ -636,6 +632,11 @@ const Repository = () => {
     .then((data) => {
       console.log(data.length);
       setMappingno(data.length);
+      if(data.length > 0){
+        setdisabled(true)
+      }else{
+        setdisabled(false)
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -876,9 +877,9 @@ const Repository = () => {
                       className="btn1"
                       onClick={() => setModalOpen(false)}
                     >
-                      Cancel
+                      Close
                     </button>
-                    <button className="btn" id="Save" onClick={savechange}>
+                    <button className="btn_map" id="Save" onClick={savechange} disabled = {disable_button}>
                       Save Changes
                     </button>
                   </div>
@@ -945,7 +946,7 @@ const Repository = () => {
                   </div>
                   <div className="Row">
                     <div className="Column">
-                      {/* <label className="delay1" for="Delay">Delay</label> */}
+
 
                       <input
                         className="delay"
@@ -996,9 +997,7 @@ const Repository = () => {
                             </div>
                           </div>
                           <div className="insidediv">
-                            {/* <label for="requuirement_name">
-            <b>Select Device</b>
-          </label> */}
+
                             <b>Select Device:</b>{" "}
                             <select
                               className="device"
@@ -1114,9 +1113,7 @@ const Repository = () => {
                             </div>
                           </div>
                           <div className="insidediv">
-                            {/* <label for="requuirement_name">
-            <b>Select Device</b>
-          </label> */}
+
                             <b>Select Device:</b>{" "}
                             <select
                               className="device"
@@ -1150,11 +1147,7 @@ const Repository = () => {
                                   ></input>
                                 </div>
                                 <br></br>
-                                {/* <div className="buttondiv">
-              <button type="button" className="actionbtn">
-              Add Command
-            </button>
-            </div> */}
+
                                 <div className="upperdiv">
                                   <b>Upper Limit:</b>{" "}
                                   <input
@@ -1203,9 +1196,7 @@ const Repository = () => {
                             </div>
                           </div>
                           <div className="insidediv">
-                            {/* <label for="requuirement_name">
-            <b>Select Device</b>
-          </label> */}
+
                             <b>Select Device:</b>{" "}
                             <select
                               className="device"
@@ -1244,11 +1235,7 @@ const Repository = () => {
                                     <option value="Default">Default</option>
                                   </select>
                                 </div>
-                                {/* <div className="buttondiv">
-              <button type="button" className="actionbtn">
-              Add Command
-            </button>
-            </div> */}
+
                                 <div className="filediv1">
                                   <b>Filename:</b>{" "}
                                   <input
@@ -1268,8 +1255,7 @@ const Repository = () => {
                       );
                     })}
                   </form>
-                  {/* <button onClick={addFields}>Add More..</button>
-      <button onClick={submit}>Submit</button> */}
+
                 </div>
               ) : null}
 
@@ -1352,8 +1338,6 @@ const Repository = () => {
                                       is greater than
                                     </option>
                                   </select>
-                                  {/* </div>
-              <div className="filediv"> */}
                                   <input
                                     type="number"
                                     className="Upper"

@@ -11,6 +11,7 @@ import { Divider } from "@material-ui/core";
 import OpenWithIcon from "@mui/icons-material/OpenWith";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { FaFolder, FaFolderOpen } from "react-icons/fa";
 
 const sub_array = [];
 const sub_array1 = [];
@@ -50,8 +51,8 @@ const data1 = {
 };
 
 const Header = ({ onSelect, style, customStyles, node }) => {
-  const iconType = node.children ? "folder" : "file-text";
-  const iconClass = `fa fa-${iconType}`;
+  const iconType = node.children ? <FaFolder /> : <FaFolderOpen />;
+  const iconClass = {iconType};
   const iconStyle = { marginRight: "5px" };
 
   return (
